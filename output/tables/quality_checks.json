@@ -1,0 +1,11 @@
+{
+  "source_rows": 368,
+  "clean_rows": 184,
+  "excluded_or_missing_values": 0,
+  "periods": 46,
+  "source_manifest": "source_20261124T160941732052Z_910ccddb3399.json",
+  "source_sha256": "910ccddb33990b3e3b212a05b3ec5f9700086babd51592a7af195ce315ec1b03",
+  "analysis_generated_at_utc": "2026-11-24T16:26:54.217900+00:00",
+  "python": "3.14.4",
+  "sqlite": "3.50.4"
+}
