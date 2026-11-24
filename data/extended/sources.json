@@ -1,0 +1,81 @@
+{
+  "format": "uk-regional-research-inputs-v1",
+  "attribution": "Source: Office for National Statistics and HMRC via ONS and Nomis. Contains public sector information licensed under the Open Government Licence v3.0.",
+  "source_pages": {
+    "paye": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/realtimeinformationstatisticsreferencetableseasonallyadjusted",
+    "ashe": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/regionbyindustry2digitsicashetable5",
+    "bres": "https://www.nomisweb.co.uk/datasets/newbres6pub",
+    "cpih": "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l522/mm23"
+  },
+  "source_updates": {
+    "paye": "2026-11-17",
+    "ashe2019": "2019 revised archive",
+    "ashe2024": "2024 revised archive",
+    "ashe2025": "2025 revised archive",
+    "ashe2026": "2026 provisional, released 2026-10-22",
+    "bres": "2025-10-28 09:30:00",
+    "cpih": "2026-11-18"
+  },
+  "downloads": {
+    "rti.xlsx": {
+      "source_url": "https://www.ons.gov.uk/file?uri=%2Femploymentandlabourmarket%2Fpeopleinwork%2Fearningsandworkinghours%2Fdatasets%2Frealtimeinformationstatisticsreferencetableseasonallyadjusted%2Fcurrent%2Frtisanov2026.xlsx",
+      "retrieved_at_utc": "2026-11-24T17:32:54.220372+00:00",
+      "sha256": "6a164f97c6bf7d821d402fe2048d437e2c6265a6dd018c9b75a39e56378944bf",
+      "bytes": 2246982
+    },
+    "ashe2019.zip": {
+      "source_url": "https://www.ons.gov.uk/file?uri=%2Femploymentandlabourmarket%2Fpeopleinwork%2Fearningsandworkinghours%2Fdatasets%2Fregionbyindustry2digitsicashetable5%2F2019revised%2Fsic2007table52019revised.zip",
+      "retrieved_at_utc": "2026-11-24T17:32:57.130061+00:00",
+      "sha256": "7420b39d5c5ab5c29d7a267caddaed73240921557c60a4dd64ad70ccaec46286",
+      "bytes": 15264331
+    },
+    "ashe2024.zip": {
+      "source_url": "https://www.ons.gov.uk/file?uri=%2Femploymentandlabourmarket%2Fpeopleinwork%2Fearningsandworkinghours%2Fdatasets%2Fregionbyindustry2digitsicashetable5%2F2024revised%2Fashetable52024revised.zip",
+      "retrieved_at_utc": "2026-11-24T17:36:13.584598+00:00",
+      "sha256": "355278262d6a3e8fa86cddadaca7bc545f32bc1d86b52fb018e6c56608076d16",
+      "bytes": 25270759
+    },
+    "ashe2025.zip": {
+      "source_url": "https://www.ons.gov.uk/file?uri=%2Femploymentandlabourmarket%2Fpeopleinwork%2Fearningsandworkinghours%2Fdatasets%2Fregionbyindustry2digitsicashetable5%2F2025revised%2Fashetable52025revised.zip",
+      "retrieved_at_utc": "2026-11-24T17:32:59.780044+00:00",
+      "sha256": "4c566f37d984d179969bde5d49c86c1353595a82efc1f42a0104df7438225997",
+      "bytes": 22760349
+    },
+    "ashe2026.zip": {
+      "source_url": "https://www.ons.gov.uk/file?uri=%2Femploymentandlabourmarket%2Fpeopleinwork%2Fearningsandworkinghours%2Fdatasets%2Fregionbyindustry2digitsicashetable5%2F2026provisional%2Fashetable52026provisional.zip",
+      "retrieved_at_utc": "2026-11-24T17:36:12.743997+00:00",
+      "sha256": "164220a6bfecee98e15e853db66d998dabdc7acd76998754f19ca29fee833bff",
+      "bytes": 22876247
+    },
+    "bres.csv": {
+      "source_url": "https://www.nomisweb.co.uk/api/v01/dataset/NM_189_1.data.csv?geography=2013265921%2C2013265922%2C2013265923%2C2013265924%2C2013265925%2C2013265926%2C2013265927%2C2013265928%2C2013265929&time=2018%2C2019%2C2023%2C2024&industry=146800641%2C146800642%2C146800643%2C146800645%2C146800646%2C146800647%2C146800648%2C146800649%2C146800650%2C146800651%2C146800652%2C146800653%2C146800654%2C146800655%2C146800656%2C146800657%2C146800658%2C146800659%2C146800660%2C146800661%2C146800662%2C146800663%2C146800664%2C146800665%2C146800666%2C146800667%2C146800668%2C146800669%2C146800670%2C146800671%2C146800672%2C146800673%2C146800675%2C146800676%2C146800677%2C146800678%2C146800679%2C146800681%2C146800682%2C146800683%2C146800685%2C146800686%2C146800687%2C146800689%2C146800690%2C146800691%2C146800692%2C146800693%2C146800695%2C146800696%2C146800698%2C146800699%2C146800700%2C146800701%2C146800702%2C146800703%2C146800704%2C146800705%2C146800706%2C146800708%2C146800709%2C146800710%2C146800711%2C146800712%2C146800713%2C146800714%2C146800715%2C146800717%2C146800718%2C146800719%2C146800720%2C146800721%2C146800722%2C146800724%2C146800725%2C146800726%2C146800727%2C146800728%2C146800730%2C146800731%2C146800732%2C146800733%2C146800734%2C146800735%2C146800736%2C146800737%2C146800738%2C146800739%2C37748736&employment_status=1&measure=1&measures=20100",
+      "retrieved_at_utc": "2026-11-24T17:36:09.537475+00:00",
+      "sha256": "a22b48bab5c632a8910243cb69dc066b71126c254a38a940d76a723feed3ceb1",
+      "bytes": 2261983
+    },
+    "cpih.csv": {
+      "source_url": "https://www.ons.gov.uk/generator?format=csv&uri=%2Feconomy%2Finflationandpriceindices%2Ftimeseries%2Fl522%2Fmm23",
+      "retrieved_at_utc": "2026-11-24T17:36:07.230902+00:00",
+      "sha256": "9d251036cc9f58b8e867dcc12a137c28dce1b3d27df0b5204331d931b6e25ce5",
+      "bytes": 11963
+    }
+  },
+  "prepared_inputs": {
+    "bres.csv": {
+      "sha256": "4bfee894a085e95e7c06725ed3f21353c3cdbbf88e38769c531775ffc5549550",
+      "rows": 5607
+    },
+    "paye.csv": {
+      "sha256": "33788b37455ec3108992f85c8a4b61550e723764230eb6dcdf667440c55faf2e",
+      "rows": 1332
+    },
+    "ashe.csv": {
+      "sha256": "18163dcfdd9d014e378ebcf2e191a92e0fd9171bcc38b6878ec04e9ff793d08d",
+      "rows": 480
+    },
+    "cpih.csv": {
+      "sha256": "72f9aac8d20cc5dbf91705a02e74522bcb4338248289d2df68af99afadb572e7",
+      "rows": 106
+    }
+  }
+}

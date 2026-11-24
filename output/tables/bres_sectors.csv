@@ -1,0 +1,1198 @@
+year,region,sector,sector_label,employees
+2018,East,A,Agriculture,25875.0
+2018,East,B,Mining,1775.0
+2018,East,C,Manufacturing,214200.0
+2018,East,D,Energy,7000.0
+2018,East,E,Water and waste,28500.0
+2018,East,F,Construction,152000.0
+2018,East,G,Wholesale and retail,460000.0
+2018,East,H,Transport and storage,158000.0
+2018,East,I,Accommodation and food,185000.0
+2018,East,J,Information and communication,97000.0
+2018,East,K,Finance and insurance,67000.0
+2018,East,L,Real estate,43000.0
+2018,East,M,Professional and technical,265000.0
+2018,East,N,Administrative services,282000.0
+2018,East,O,Public administration,85000.0
+2018,East,P,Education,255000.0
+2018,East,Q,Health and social work,330000.0
+2018,East,R,Arts and recreation,65000.0
+2018,East,S,Other services,48000.0
+2018,East Midlands,A,Agriculture,18000.0
+2018,East Midlands,B,Mining,3750.0
+2018,East Midlands,C,Manufacturing,266300.0
+2018,East Midlands,D,Energy,16000.0
+2018,East Midlands,E,Water and waste,14770.0
+2018,East Midlands,F,Construction,91000.0
+2018,East Midlands,G,Wholesale and retail,344000.0
+2018,East Midlands,H,Transport and storage,114015.0
+2018,East Midlands,I,Accommodation and food,143000.0
+2018,East Midlands,J,Information and communication,59100.0
+2018,East Midlands,K,Finance and insurance,35250.0
+2018,East Midlands,L,Real estate,27000.0
+2018,East Midlands,M,Professional and technical,132000.0
+2018,East Midlands,N,Administrative services,175500.0
+2018,East Midlands,O,Public administration,76000.0
+2018,East Midlands,P,Education,189000.0
+2018,East Midlands,Q,Health and social work,269000.0
+2018,East Midlands,R,Arts and recreation,53000.0
+2018,East Midlands,S,Other services,42000.0
+2018,London,A,Agriculture,1045.0
+2018,London,B,Mining,2650.0
+2018,London,C,Manufacturing,113120.0
+2018,London,D,Energy,19000.0
+2018,London,E,Water and waste,14800.0
+2018,London,F,Construction,184000.0
+2018,London,G,Wholesale and retail,617000.0
+2018,London,H,Transport and storage,212500.0
+2018,London,I,Accommodation and food,436000.0
+2018,London,J,Information and communication,408000.0
+2018,London,K,Finance and insurance,362000.0
+2018,London,L,Real estate,137000.0
+2018,London,M,Professional and technical,704500.0
+2018,London,N,Administrative services,549000.0
+2018,London,O,Public administration,225000.0
+2018,London,P,Education,383000.0
+2018,London,Q,Health and social work,530000.0
+2018,London,R,Arts and recreation,127000.0
+2018,London,S,Other services,120000.0
+2018,North East,A,Agriculture,3655.0
+2018,North East,B,Mining,1575.0
+2018,North East,C,Manufacturing,114080.0
+2018,North East,D,Energy,7000.0
+2018,North East,E,Water and waste,7975.0
+2018,North East,F,Construction,54000.0
+2018,North East,G,Wholesale and retail,150000.0
+2018,North East,H,Transport and storage,48900.0
+2018,North East,I,Accommodation and food,74000.0
+2018,North East,J,Information and communication,32150.0
+2018,North East,K,Finance and insurance,25500.0
+2018,North East,L,Real estate,18000.0
+2018,North East,M,Professional and technical,48250.0
+2018,North East,N,Administrative services,86500.0
+2018,North East,O,Public administration,67000.0
+2018,North East,P,Education,99000.0
+2018,North East,Q,Health and social work,168000.0
+2018,North East,R,Arts and recreation,22750.0
+2018,North East,S,Other services,22750.0
+2018,North West,A,Agriculture,14150.0
+2018,North West,B,Mining,2330.0
+2018,North West,C,Manufacturing,322500.0
+2018,North West,D,Energy,18000.0
+2018,North West,E,Water and waste,20950.0
+2018,North West,F,Construction,156000.0
+2018,North West,G,Wholesale and retail,561000.0
+2018,North West,H,Transport and storage,181250.0
+2018,North West,I,Accommodation and food,237000.0
+2018,North West,J,Information and communication,89750.0
+2018,North West,K,Finance and insurance,88000.0
+2018,North West,L,Real estate,49000.0
+2018,North West,M,Professional and technical,270000.0
+2018,North West,N,Administrative services,299000.0
+2018,North West,O,Public administration,149000.0
+2018,North West,P,Education,282000.0
+2018,North West,Q,Health and social work,447000.0
+2018,North West,R,Arts and recreation,81000.0
+2018,North West,S,Other services,62000.0
+2018,South East,A,Agriculture,33450.0
+2018,South East,B,Mining,1525.0
+2018,South East,C,Manufacturing,263750.0
+2018,South East,D,Energy,17000.0
+2018,South East,E,Water and waste,30600.0
+2018,South East,F,Construction,212000.0
+2018,South East,G,Wholesale and retail,678000.0
+2018,South East,H,Transport and storage,194500.0
+2018,South East,I,Accommodation and food,304000.0
+2018,South East,J,Information and communication,236000.0
+2018,South East,K,Finance and insurance,119000.0
+2018,South East,L,Real estate,58000.0
+2018,South East,M,Professional and technical,373000.0
+2018,South East,N,Administrative services,359000.0
+2018,South East,O,Public administration,131000.0
+2018,South East,P,Education,413000.0
+2018,South East,Q,Health and social work,526000.0
+2018,South East,R,Arts and recreation,111000.0
+2018,South East,S,Other services,88000.0
+2018,South West,A,Agriculture,25100.0
+2018,South West,B,Mining,3300.0
+2018,South West,C,Manufacturing,209900.0
+2018,South West,D,Energy,13000.0
+2018,South West,E,Water and waste,21800.0
+2018,South West,F,Construction,133000.0
+2018,South West,G,Wholesale and retail,389000.0
+2018,South West,H,Transport and storage,97200.0
+2018,South West,I,Accommodation and food,240000.0
+2018,South West,J,Information and communication,83250.0
+2018,South West,K,Finance and insurance,68000.0
+2018,South West,L,Real estate,44000.0
+2018,South West,M,Professional and technical,177000.0
+2018,South West,N,Administrative services,161000.0
+2018,South West,O,Public administration,109000.0
+2018,South West,P,Education,216000.0
+2018,South West,Q,Health and social work,364000.0
+2018,South West,R,Arts and recreation,65500.0
+2018,South West,S,Other services,47000.0
+2018,West Midlands,A,Agriculture,22350.0
+2018,West Midlands,B,Mining,715.0
+2018,West Midlands,C,Manufacturing,302700.0
+2018,West Midlands,D,Energy,10000.0
+2018,West Midlands,E,Water and waste,19750.0
+2018,West Midlands,F,Construction,123000.0
+2018,West Midlands,G,Wholesale and retail,424000.0
+2018,West Midlands,H,Transport and storage,142400.0
+2018,West Midlands,I,Accommodation and food,146000.0
+2018,West Midlands,J,Information and communication,70250.0
+2018,West Midlands,K,Finance and insurance,62000.0
+2018,West Midlands,L,Real estate,46000.0
+2018,West Midlands,M,Professional and technical,178000.0
+2018,West Midlands,N,Administrative services,239000.0
+2018,West Midlands,O,Public administration,93000.0
+2018,West Midlands,P,Education,240000.0
+2018,West Midlands,Q,Health and social work,347000.0
+2018,West Midlands,R,Arts and recreation,50500.0
+2018,West Midlands,S,Other services,61000.0
+2018,Yorkshire and The Humber,A,Agriculture,15200.0
+2018,Yorkshire and The Humber,B,Mining,1975.0
+2018,Yorkshire and The Humber,C,Manufacturing,280690.0
+2018,Yorkshire and The Humber,D,Energy,9000.0
+2018,Yorkshire and The Humber,E,Water and waste,19750.0
+2018,Yorkshire and The Humber,F,Construction,97000.0
+2018,Yorkshire and The Humber,G,Wholesale and retail,358000.0
+2018,Yorkshire and The Humber,H,Transport and storage,132350.0
+2018,Yorkshire and The Humber,I,Accommodation and food,173000.0
+2018,Yorkshire and The Humber,J,Information and communication,74500.0
+2018,Yorkshire and The Humber,K,Finance and insurance,73000.0
+2018,Yorkshire and The Humber,L,Real estate,31000.0
+2018,Yorkshire and The Humber,M,Professional and technical,165500.0
+2018,Yorkshire and The Humber,N,Administrative services,208500.0
+2018,Yorkshire and The Humber,O,Public administration,103000.0
+2018,Yorkshire and The Humber,P,Education,234000.0
+2018,Yorkshire and The Humber,Q,Health and social work,326000.0
+2018,Yorkshire and The Humber,R,Arts and recreation,56000.0
+2018,Yorkshire and The Humber,S,Other services,30600.0
+2019,East,A,Agriculture,26300.0
+2019,East,B,Mining,1850.0
+2019,East,C,Manufacturing,211370.0
+2019,East,D,Energy,6000.0
+2019,East,E,Water and waste,20950.0
+2019,East,F,Construction,167000.0
+2019,East,G,Wholesale and retail,443000.0
+2019,East,H,Transport and storage,137600.0
+2019,East,I,Accommodation and food,192000.0
+2019,East,J,Information and communication,107000.0
+2019,East,K,Finance and insurance,70000.0
+2019,East,L,Real estate,47000.0
+2019,East,M,Professional and technical,267000.0
+2019,East,N,Administrative services,285000.0
+2019,East,O,Public administration,92000.0
+2019,East,P,Education,255000.0
+2019,East,Q,Health and social work,332000.0
+2019,East,R,Arts and recreation,72000.0
+2019,East,S,Other services,54000.0
+2019,East Midlands,A,Agriculture,19125.0
+2019,East Midlands,B,Mining,3810.0
+2019,East Midlands,C,Manufacturing,266825.0
+2019,East Midlands,D,Energy,14000.0
+2019,East Midlands,E,Water and waste,15285.0
+2019,East Midlands,F,Construction,98000.0
+2019,East Midlands,G,Wholesale and retail,346000.0
+2019,East Midlands,H,Transport and storage,129005.0
+2019,East Midlands,I,Accommodation and food,139000.0
+2019,East Midlands,J,Information and communication,49350.0
+2019,East Midlands,K,Finance and insurance,37000.0
+2019,East Midlands,L,Real estate,28000.0
+2019,East Midlands,M,Professional and technical,159500.0
+2019,East Midlands,N,Administrative services,175500.0
+2019,East Midlands,O,Public administration,80000.0
+2019,East Midlands,P,Education,191000.0
+2019,East Midlands,Q,Health and social work,248000.0
+2019,East Midlands,R,Arts and recreation,48250.0
+2019,East Midlands,S,Other services,40500.0
+2019,London,A,Agriculture,1450.0
+2019,London,B,Mining,2800.0
+2019,London,C,Manufacturing,122110.0
+2019,London,D,Energy,11000.0
+2019,London,E,Water and waste,15950.0
+2019,London,F,Construction,198000.0
+2019,London,G,Wholesale and retail,607000.0
+2019,London,H,Transport and storage,261000.0
+2019,London,I,Accommodation and food,427000.0
+2019,London,J,Information and communication,443000.0
+2019,London,K,Finance and insurance,387000.0
+2019,London,L,Real estate,140000.0
+2019,London,M,Professional and technical,681000.0
+2019,London,N,Administrative services,566000.0
+2019,London,O,Public administration,229000.0
+2019,London,P,Education,375000.0
+2019,London,Q,Health and social work,527000.0
+2019,London,R,Arts and recreation,140000.0
+2019,London,S,Other services,122000.0
+2019,North East,A,Agriculture,4500.0
+2019,North East,B,Mining,1450.0
+2019,North East,C,Manufacturing,108480.0
+2019,North East,D,Energy,11000.0
+2019,North East,E,Water and waste,6575.0
+2019,North East,F,Construction,48000.0
+2019,North East,G,Wholesale and retail,156000.0
+2019,North East,H,Transport and storage,48500.0
+2019,North East,I,Accommodation and food,80000.0
+2019,North East,J,Information and communication,32900.0
+2019,North East,K,Finance and insurance,24250.0
+2019,North East,L,Real estate,19000.0
+2019,North East,M,Professional and technical,62000.0
+2019,North East,N,Administrative services,82250.0
+2019,North East,O,Public administration,69000.0
+2019,North East,P,Education,99000.0
+2019,North East,Q,Health and social work,171000.0
+2019,North East,R,Arts and recreation,26000.0
+2019,North East,S,Other services,19500.0
+2019,North West,A,Agriculture,13550.0
+2019,North West,B,Mining,2915.0
+2019,North West,C,Manufacturing,314000.0
+2019,North West,D,Energy,16000.0
+2019,North West,E,Water and waste,23600.0
+2019,North West,F,Construction,156000.0
+2019,North West,G,Wholesale and retail,552000.0
+2019,North West,H,Transport and storage,191500.0
+2019,North West,I,Accommodation and food,236000.0
+2019,North West,J,Information and communication,96000.0
+2019,North West,K,Finance and insurance,94000.0
+2019,North West,L,Real estate,51000.0
+2019,North West,M,Professional and technical,305500.0
+2019,North West,N,Administrative services,293000.0
+2019,North West,O,Public administration,155000.0
+2019,North West,P,Education,272000.0
+2019,North West,Q,Health and social work,482000.0
+2019,North West,R,Arts and recreation,88000.0
+2019,North West,S,Other services,64000.0
+2019,South East,A,Agriculture,33150.0
+2019,South East,B,Mining,2350.0
+2019,South East,C,Manufacturing,276400.0
+2019,South East,D,Energy,17000.0
+2019,South East,E,Water and waste,32500.0
+2019,South East,F,Construction,220000.0
+2019,South East,G,Wholesale and retail,687000.0
+2019,South East,H,Transport and storage,187000.0
+2019,South East,I,Accommodation and food,323000.0
+2019,South East,J,Information and communication,239500.0
+2019,South East,K,Finance and insurance,114000.0
+2019,South East,L,Real estate,60000.0
+2019,South East,M,Professional and technical,379000.0
+2019,South East,N,Administrative services,351000.0
+2019,South East,O,Public administration,133000.0
+2019,South East,P,Education,418000.0
+2019,South East,Q,Health and social work,540000.0
+2019,South East,R,Arts and recreation,97000.0
+2019,South East,S,Other services,102000.0
+2019,South West,A,Agriculture,26050.0
+2019,South West,B,Mining,4000.0
+2019,South West,C,Manufacturing,214400.0
+2019,South West,D,Energy,11000.0
+2019,South West,E,Water and waste,20100.0
+2019,South West,F,Construction,140000.0
+2019,South West,G,Wholesale and retail,398000.0
+2019,South West,H,Transport and storage,94000.0
+2019,South West,I,Accommodation and food,235000.0
+2019,South West,J,Information and communication,77000.0
+2019,South West,K,Finance and insurance,78000.0
+2019,South West,L,Real estate,43000.0
+2019,South West,M,Professional and technical,208000.0
+2019,South West,N,Administrative services,174000.0
+2019,South West,O,Public administration,105000.0
+2019,South West,P,Education,213000.0
+2019,South West,Q,Health and social work,346000.0
+2019,South West,R,Arts and recreation,60500.0
+2019,South West,S,Other services,45000.0
+2019,West Midlands,A,Agriculture,20750.0
+2019,West Midlands,B,Mining,1620.0
+2019,West Midlands,C,Manufacturing,301350.0
+2019,West Midlands,D,Energy,11000.0
+2019,West Midlands,E,Water and waste,21100.0
+2019,West Midlands,F,Construction,115000.0
+2019,West Midlands,G,Wholesale and retail,414000.0
+2019,West Midlands,H,Transport and storage,154050.0
+2019,West Midlands,I,Accommodation and food,190000.0
+2019,West Midlands,J,Information and communication,67000.0
+2019,West Midlands,K,Finance and insurance,63000.0
+2019,West Midlands,L,Real estate,45000.0
+2019,West Midlands,M,Professional and technical,165500.0
+2019,West Midlands,N,Administrative services,242000.0
+2019,West Midlands,O,Public administration,96000.0
+2019,West Midlands,P,Education,229000.0
+2019,West Midlands,Q,Health and social work,345000.0
+2019,West Midlands,R,Arts and recreation,58000.0
+2019,West Midlands,S,Other services,52000.0
+2019,Yorkshire and The Humber,A,Agriculture,13650.0
+2019,Yorkshire and The Humber,B,Mining,1625.0
+2019,Yorkshire and The Humber,C,Manufacturing,271650.0
+2019,Yorkshire and The Humber,D,Energy,8000.0
+2019,Yorkshire and The Humber,E,Water and waste,16550.0
+2019,Yorkshire and The Humber,F,Construction,129000.0
+2019,Yorkshire and The Humber,G,Wholesale and retail,368000.0
+2019,Yorkshire and The Humber,H,Transport and storage,124300.0
+2019,Yorkshire and The Humber,I,Accommodation and food,156000.0
+2019,Yorkshire and The Humber,J,Information and communication,71000.0
+2019,Yorkshire and The Humber,K,Finance and insurance,68000.0
+2019,Yorkshire and The Humber,L,Real estate,32000.0
+2019,Yorkshire and The Humber,M,Professional and technical,163000.0
+2019,Yorkshire and The Humber,N,Administrative services,201000.0
+2019,Yorkshire and The Humber,O,Public administration,105000.0
+2019,Yorkshire and The Humber,P,Education,225000.0
+2019,Yorkshire and The Humber,Q,Health and social work,340000.0
+2019,Yorkshire and The Humber,R,Arts and recreation,54000.0
+2019,Yorkshire and The Humber,S,Other services,50000.0
+2020,East,A,Agriculture,31950.0
+2020,East,B,Mining,1375.0
+2020,East,C,Manufacturing,191420.0
+2020,East,D,Energy,7000.0
+2020,East,E,Water and waste,23750.0
+2020,East,F,Construction,178000.0
+2020,East,G,Wholesale and retail,445000.0
+2020,East,H,Transport and storage,153900.0
+2020,East,I,Accommodation and food,193000.0
+2020,East,J,Information and communication,107800.0
+2020,East,K,Finance and insurance,64000.0
+2020,East,L,Real estate,39000.0
+2020,East,M,Professional and technical,251000.0
+2020,East,N,Administrative services,295000.0
+2020,East,O,Public administration,92000.0
+2020,East,P,Education,244000.0
+2020,East,Q,Health and social work,350000.0
+2020,East,R,Arts and recreation,57000.0
+2020,East,S,Other services,51000.0
+2020,East Midlands,A,Agriculture,22000.0
+2020,East Midlands,B,Mining,3650.0
+2020,East Midlands,C,Manufacturing,252300.0
+2020,East Midlands,D,Energy,13000.0
+2020,East Midlands,E,Water and waste,12020.0
+2020,East Midlands,F,Construction,93000.0
+2020,East Midlands,G,Wholesale and retail,335000.0
+2020,East Midlands,H,Transport and storage,145250.0
+2020,East Midlands,I,Accommodation and food,130000.0
+2020,East Midlands,J,Information and communication,64800.0
+2020,East Midlands,K,Finance and insurance,34500.0
+2020,East Midlands,L,Real estate,36000.0
+2020,East Midlands,M,Professional and technical,148000.0
+2020,East Midlands,N,Administrative services,143000.0
+2020,East Midlands,O,Public administration,80000.0
+2020,East Midlands,P,Education,187000.0
+2020,East Midlands,Q,Health and social work,274000.0
+2020,East Midlands,R,Arts and recreation,43250.0
+2020,East Midlands,S,Other services,33000.0
+2020,London,A,Agriculture,725.0
+2020,London,B,Mining,2600.0
+2020,London,C,Manufacturing,112055.0
+2020,London,D,Energy,13000.0
+2020,London,E,Water and waste,18850.0
+2020,London,F,Construction,168000.0
+2020,London,G,Wholesale and retail,626000.0
+2020,London,H,Transport and storage,256500.0
+2020,London,I,Accommodation and food,385000.0
+2020,London,J,Information and communication,405000.0
+2020,London,K,Finance and insurance,384000.0
+2020,London,L,Real estate,128000.0
+2020,London,M,Professional and technical,681500.0
+2020,London,N,Administrative services,500000.0
+2020,London,O,Public administration,238000.0
+2020,London,P,Education,389000.0
+2020,London,Q,Health and social work,577000.0
+2020,London,R,Arts and recreation,116000.0
+2020,London,S,Other services,117000.0
+2020,North East,A,Agriculture,4575.0
+2020,North East,B,Mining,2375.0
+2020,North East,C,Manufacturing,103950.0
+2020,North East,D,Energy,7000.0
+2020,North East,E,Water and waste,7050.0
+2020,North East,F,Construction,45000.0
+2020,North East,G,Wholesale and retail,140000.0
+2020,North East,H,Transport and storage,48700.0
+2020,North East,I,Accommodation and food,89000.0
+2020,North East,J,Information and communication,30725.0
+2020,North East,K,Finance and insurance,23250.0
+2020,North East,L,Real estate,16000.0
+2020,North East,M,Professional and technical,52250.0
+2020,North East,N,Administrative services,84000.0
+2020,North East,O,Public administration,69000.0
+2020,North East,P,Education,101000.0
+2020,North East,Q,Health and social work,177000.0
+2020,North East,R,Arts and recreation,20250.0
+2020,North East,S,Other services,17700.0
+2020,North West,A,Agriculture,13700.0
+2020,North West,B,Mining,1710.0
+2020,North West,C,Manufacturing,322500.0
+2020,North West,D,Energy,19000.0
+2020,North West,E,Water and waste,22200.0
+2020,North West,F,Construction,139000.0
+2020,North West,G,Wholesale and retail,551000.0
+2020,North West,H,Transport and storage,165600.0
+2020,North West,I,Accommodation and food,224000.0
+2020,North West,J,Information and communication,102500.0
+2020,North West,K,Finance and insurance,87000.0
+2020,North West,L,Real estate,53000.0
+2020,North West,M,Professional and technical,295000.0
+2020,North West,N,Administrative services,278000.0
+2020,North West,O,Public administration,152000.0
+2020,North West,P,Education,280000.0
+2020,North West,Q,Health and social work,476000.0
+2020,North West,R,Arts and recreation,74000.0
+2020,North West,S,Other services,58000.0
+2020,South East,A,Agriculture,37300.0
+2020,South East,B,Mining,2125.0
+2020,South East,C,Manufacturing,258000.0
+2020,South East,D,Energy,18000.0
+2020,South East,E,Water and waste,29250.0
+2020,South East,F,Construction,237000.0
+2020,South East,G,Wholesale and retail,629000.0
+2020,South East,H,Transport and storage,186500.0
+2020,South East,I,Accommodation and food,297000.0
+2020,South East,J,Information and communication,249250.0
+2020,South East,K,Finance and insurance,124000.0
+2020,South East,L,Real estate,72000.0
+2020,South East,M,Professional and technical,361000.0
+2020,South East,N,Administrative services,330000.0
+2020,South East,O,Public administration,135000.0
+2020,South East,P,Education,419000.0
+2020,South East,Q,Health and social work,525000.0
+2020,South East,R,Arts and recreation,109000.0
+2020,South East,S,Other services,88000.0
+2020,South West,A,Agriculture,27150.0
+2020,South West,B,Mining,2550.0
+2020,South West,C,Manufacturing,209900.0
+2020,South West,D,Energy,10000.0
+2020,South West,E,Water and waste,22500.0
+2020,South West,F,Construction,124000.0
+2020,South West,G,Wholesale and retail,375000.0
+2020,South West,H,Transport and storage,104500.0
+2020,South West,I,Accommodation and food,220000.0
+2020,South West,J,Information and communication,99750.0
+2020,South West,K,Finance and insurance,67000.0
+2020,South West,L,Real estate,53000.0
+2020,South West,M,Professional and technical,197000.0
+2020,South West,N,Administrative services,194500.0
+2020,South West,O,Public administration,107000.0
+2020,South West,P,Education,224000.0
+2020,South West,Q,Health and social work,343000.0
+2020,South West,R,Arts and recreation,50500.0
+2020,South West,S,Other services,39250.0
+2020,West Midlands,A,Agriculture,21650.0
+2020,West Midlands,B,Mining,1395.0
+2020,West Midlands,C,Manufacturing,278550.0
+2020,West Midlands,D,Energy,13000.0
+2020,West Midlands,E,Water and waste,17750.0
+2020,West Midlands,F,Construction,110000.0
+2020,West Midlands,G,Wholesale and retail,410000.0
+2020,West Midlands,H,Transport and storage,152750.0
+2020,West Midlands,I,Accommodation and food,157000.0
+2020,West Midlands,J,Information and communication,72000.0
+2020,West Midlands,K,Finance and insurance,63000.0
+2020,West Midlands,L,Real estate,41000.0
+2020,West Midlands,M,Professional and technical,180500.0
+2020,West Midlands,N,Administrative services,248000.0
+2020,West Midlands,O,Public administration,99000.0
+2020,West Midlands,P,Education,233000.0
+2020,West Midlands,Q,Health and social work,351000.0
+2020,West Midlands,R,Arts and recreation,48500.0
+2020,West Midlands,S,Other services,66000.0
+2020,Yorkshire and The Humber,A,Agriculture,13800.0
+2020,Yorkshire and The Humber,B,Mining,1850.0
+2020,Yorkshire and The Humber,C,Manufacturing,266300.0
+2020,Yorkshire and The Humber,D,Energy,9000.0
+2020,Yorkshire and The Humber,E,Water and waste,18500.0
+2020,Yorkshire and The Humber,F,Construction,122000.0
+2020,Yorkshire and The Humber,G,Wholesale and retail,346000.0
+2020,Yorkshire and The Humber,H,Transport and storage,123650.0
+2020,Yorkshire and The Humber,I,Accommodation and food,147000.0
+2020,Yorkshire and The Humber,J,Information and communication,62800.0
+2020,Yorkshire and The Humber,K,Finance and insurance,67000.0
+2020,Yorkshire and The Humber,L,Real estate,35000.0
+2020,Yorkshire and The Humber,M,Professional and technical,159000.0
+2020,Yorkshire and The Humber,N,Administrative services,224000.0
+2020,Yorkshire and The Humber,O,Public administration,108000.0
+2020,Yorkshire and The Humber,P,Education,223000.0
+2020,Yorkshire and The Humber,Q,Health and social work,321000.0
+2020,Yorkshire and The Humber,R,Arts and recreation,55500.0
+2020,Yorkshire and The Humber,S,Other services,34500.0
+2021,East,A,Agriculture,24600.0
+2021,East,B,Mining,1600.0
+2021,East,C,Manufacturing,205350.0
+2021,East,D,Energy,5000.0
+2021,East,E,Water and waste,19950.0
+2021,East,F,Construction,167000.0
+2021,East,G,Wholesale and retail,425000.0
+2021,East,H,Transport and storage,154700.0
+2021,East,I,Accommodation and food,194000.0
+2021,East,J,Information and communication,113500.0
+2021,East,K,Finance and insurance,59000.0
+2021,East,L,Real estate,47000.0
+2021,East,M,Professional and technical,257000.0
+2021,East,N,Administrative services,331000.0
+2021,East,O,Public administration,96000.0
+2021,East,P,Education,269000.0
+2021,East,Q,Health and social work,343000.0
+2021,East,R,Arts and recreation,61500.0
+2021,East,S,Other services,51000.0
+2021,East Midlands,A,Agriculture,16775.0
+2021,East Midlands,B,Mining,3690.0
+2021,East Midlands,C,Manufacturing,248750.0
+2021,East Midlands,D,Energy,16000.0
+2021,East Midlands,E,Water and waste,14285.0
+2021,East Midlands,F,Construction,98000.0
+2021,East Midlands,G,Wholesale and retail,344000.0
+2021,East Midlands,H,Transport and storage,134025.0
+2021,East Midlands,I,Accommodation and food,138000.0
+2021,East Midlands,J,Information and communication,62600.0
+2021,East Midlands,K,Finance and insurance,40000.0
+2021,East Midlands,L,Real estate,29000.0
+2021,East Midlands,M,Professional and technical,149250.0
+2021,East Midlands,N,Administrative services,171500.0
+2021,East Midlands,O,Public administration,85000.0
+2021,East Midlands,P,Education,187000.0
+2021,East Midlands,Q,Health and social work,284000.0
+2021,East Midlands,R,Arts and recreation,48500.0
+2021,East Midlands,S,Other services,37500.0
+2021,London,A,Agriculture,2000.0
+2021,London,B,Mining,2150.0
+2021,London,C,Manufacturing,110175.0
+2021,London,D,Energy,19000.0
+2021,London,E,Water and waste,17650.0
+2021,London,F,Construction,189000.0
+2021,London,G,Wholesale and retail,608000.0
+2021,London,H,Transport and storage,224500.0
+2021,London,I,Accommodation and food,394000.0
+2021,London,J,Information and communication,445000.0
+2021,London,K,Finance and insurance,423000.0
+2021,London,L,Real estate,135000.0
+2021,London,M,Professional and technical,755500.0
+2021,London,N,Administrative services,518000.0
+2021,London,O,Public administration,248000.0
+2021,London,P,Education,388000.0
+2021,London,Q,Health and social work,567000.0
+2021,London,R,Arts and recreation,149000.0
+2021,London,S,Other services,131000.0
+2021,North East,A,Agriculture,5050.0
+2021,North East,B,Mining,1200.0
+2021,North East,C,Manufacturing,100880.0
+2021,North East,D,Energy,4000.0
+2021,North East,E,Water and waste,9100.0
+2021,North East,F,Construction,54000.0
+2021,North East,G,Wholesale and retail,151000.0
+2021,North East,H,Transport and storage,58500.0
+2021,North East,I,Accommodation and food,95000.0
+2021,North East,J,Information and communication,32750.0
+2021,North East,K,Finance and insurance,21750.0
+2021,North East,L,Real estate,20000.0
+2021,North East,M,Professional and technical,74250.0
+2021,North East,N,Administrative services,81000.0
+2021,North East,O,Public administration,74000.0
+2021,North East,P,Education,106000.0
+2021,North East,Q,Health and social work,165000.0
+2021,North East,R,Arts and recreation,18300.0
+2021,North East,S,Other services,19500.0
+2021,North West,A,Agriculture,13700.0
+2021,North West,B,Mining,1800.0
+2021,North West,C,Manufacturing,296000.0
+2021,North West,D,Energy,16000.0
+2021,North West,E,Water and waste,15600.0
+2021,North West,F,Construction,186000.0
+2021,North West,G,Wholesale and retail,499000.0
+2021,North West,H,Transport and storage,185250.0
+2021,North West,I,Accommodation and food,271000.0
+2021,North West,J,Information and communication,97500.0
+2021,North West,K,Finance and insurance,119000.0
+2021,North West,L,Real estate,70000.0
+2021,North West,M,Professional and technical,304000.0
+2021,North West,N,Administrative services,285000.0
+2021,North West,O,Public administration,169000.0
+2021,North West,P,Education,272000.0
+2021,North West,Q,Health and social work,514000.0
+2021,North West,R,Arts and recreation,74000.0
+2021,North West,S,Other services,50000.0
+2021,South East,A,Agriculture,30700.0
+2021,South East,B,Mining,2750.0
+2021,South East,C,Manufacturing,242050.0
+2021,South East,D,Energy,18000.0
+2021,South East,E,Water and waste,41250.0
+2021,South East,F,Construction,235000.0
+2021,South East,G,Wholesale and retail,656000.0
+2021,South East,H,Transport and storage,212000.0
+2021,South East,I,Accommodation and food,303000.0
+2021,South East,J,Information and communication,226250.0
+2021,South East,K,Finance and insurance,117000.0
+2021,South East,L,Real estate,69000.0
+2021,South East,M,Professional and technical,380000.0
+2021,South East,N,Administrative services,368000.0
+2021,South East,O,Public administration,136000.0
+2021,South East,P,Education,394000.0
+2021,South East,Q,Health and social work,538000.0
+2021,South East,R,Arts and recreation,97000.0
+2021,South East,S,Other services,88000.0
+2021,South West,A,Agriculture,27400.0
+2021,South West,B,Mining,3650.0
+2021,South West,C,Manufacturing,219200.0
+2021,South West,D,Energy,12000.0
+2021,South West,E,Water and waste,24250.0
+2021,South West,F,Construction,123000.0
+2021,South West,G,Wholesale and retail,388000.0
+2021,South West,H,Transport and storage,115600.0
+2021,South West,I,Accommodation and food,250000.0
+2021,South West,J,Information and communication,79500.0
+2021,South West,K,Finance and insurance,66000.0
+2021,South West,L,Real estate,39000.0
+2021,South West,M,Professional and technical,202000.0
+2021,South West,N,Administrative services,178500.0
+2021,South West,O,Public administration,114000.0
+2021,South West,P,Education,229000.0
+2021,South West,Q,Health and social work,377000.0
+2021,South West,R,Arts and recreation,50500.0
+2021,South West,S,Other services,39000.0
+2021,West Midlands,A,Agriculture,22875.0
+2021,West Midlands,B,Mining,500.0
+2021,West Midlands,C,Manufacturing,272850.0
+2021,West Midlands,D,Energy,11000.0
+2021,West Midlands,E,Water and waste,22600.0
+2021,West Midlands,F,Construction,111000.0
+2021,West Midlands,G,Wholesale and retail,414000.0
+2021,West Midlands,H,Transport and storage,153750.0
+2021,West Midlands,I,Accommodation and food,170000.0
+2021,West Midlands,J,Information and communication,93500.0
+2021,West Midlands,K,Finance and insurance,54000.0
+2021,West Midlands,L,Real estate,43000.0
+2021,West Midlands,M,Professional and technical,177500.0
+2021,West Midlands,N,Administrative services,241000.0
+2021,West Midlands,O,Public administration,99000.0
+2021,West Midlands,P,Education,226000.0
+2021,West Midlands,Q,Health and social work,380000.0
+2021,West Midlands,R,Arts and recreation,63500.0
+2021,West Midlands,S,Other services,48000.0
+2021,Yorkshire and The Humber,A,Agriculture,14200.0
+2021,Yorkshire and The Humber,B,Mining,2025.0
+2021,Yorkshire and The Humber,C,Manufacturing,285500.0
+2021,Yorkshire and The Humber,D,Energy,7000.0
+2021,Yorkshire and The Humber,E,Water and waste,17300.0
+2021,Yorkshire and The Humber,F,Construction,112000.0
+2021,Yorkshire and The Humber,G,Wholesale and retail,329000.0
+2021,Yorkshire and The Humber,H,Transport and storage,138000.0
+2021,Yorkshire and The Humber,I,Accommodation and food,173000.0
+2021,Yorkshire and The Humber,J,Information and communication,75700.0
+2021,Yorkshire and The Humber,K,Finance and insurance,66000.0
+2021,Yorkshire and The Humber,L,Real estate,37000.0
+2021,Yorkshire and The Humber,M,Professional and technical,156500.0
+2021,Yorkshire and The Humber,N,Administrative services,216000.0
+2021,Yorkshire and The Humber,O,Public administration,114000.0
+2021,Yorkshire and The Humber,P,Education,237000.0
+2021,Yorkshire and The Humber,Q,Health and social work,359000.0
+2021,Yorkshire and The Humber,R,Arts and recreation,51000.0
+2021,Yorkshire and The Humber,S,Other services,49000.0
+2022,East,A,Agriculture,28050.0
+2022,East,B,Mining,1050.0
+2022,East,C,Manufacturing,209650.0
+2022,East,D,Energy,7000.0
+2022,East,E,Water and waste,21600.0
+2022,East,F,Construction,191000.0
+2022,East,G,Wholesale and retail,437000.0
+2022,East,H,Transport and storage,159700.0
+2022,East,I,Accommodation and food,222000.0
+2022,East,J,Information and communication,99450.0
+2022,East,K,Finance and insurance,59000.0
+2022,East,L,Real estate,53000.0
+2022,East,M,Professional and technical,221000.0
+2022,East,N,Administrative services,310000.0
+2022,East,O,Public administration,100000.0
+2022,East,P,Education,245000.0
+2022,East,Q,Health and social work,349000.0
+2022,East,R,Arts and recreation,62500.0
+2022,East,S,Other services,49000.0
+2022,East Midlands,A,Agriculture,17150.0
+2022,East Midlands,B,Mining,4980.0
+2022,East Midlands,C,Manufacturing,244200.0
+2022,East Midlands,D,Energy,13000.0
+2022,East Midlands,E,Water and waste,13325.0
+2022,East Midlands,F,Construction,119000.0
+2022,East Midlands,G,Wholesale and retail,336000.0
+2022,East Midlands,H,Transport and storage,143255.0
+2022,East Midlands,I,Accommodation and food,162000.0
+2022,East Midlands,J,Information and communication,58500.0
+2022,East Midlands,K,Finance and insurance,40000.0
+2022,East Midlands,L,Real estate,29000.0
+2022,East Midlands,M,Professional and technical,149000.0
+2022,East Midlands,N,Administrative services,193500.0
+2022,East Midlands,O,Public administration,87000.0
+2022,East Midlands,P,Education,185000.0
+2022,East Midlands,Q,Health and social work,296000.0
+2022,East Midlands,R,Arts and recreation,45000.0
+2022,East Midlands,S,Other services,29500.0
+2022,London,A,Agriculture,2900.0
+2022,London,B,Mining,2300.0
+2022,London,C,Manufacturing,115770.0
+2022,London,D,Energy,12000.0
+2022,London,E,Water and waste,21850.0
+2022,London,F,Construction,189000.0
+2022,London,G,Wholesale and retail,621000.0
+2022,London,H,Transport and storage,244500.0
+2022,London,I,Accommodation and food,483000.0
+2022,London,J,Information and communication,496000.0
+2022,London,K,Finance and insurance,391000.0
+2022,London,L,Real estate,147000.0
+2022,London,M,Professional and technical,806000.0
+2022,London,N,Administrative services,593000.0
+2022,London,O,Public administration,251000.0
+2022,London,P,Education,394000.0
+2022,London,Q,Health and social work,582000.0
+2022,London,R,Arts and recreation,129000.0
+2022,London,S,Other services,136000.0
+2022,North East,A,Agriculture,4625.0
+2022,North East,B,Mining,1475.0
+2022,North East,C,Manufacturing,103930.0
+2022,North East,D,Energy,4500.0
+2022,North East,E,Water and waste,7425.0
+2022,North East,F,Construction,48000.0
+2022,North East,G,Wholesale and retail,145000.0
+2022,North East,H,Transport and storage,57050.0
+2022,North East,I,Accommodation and food,84000.0
+2022,North East,J,Information and communication,33075.0
+2022,North East,K,Finance and insurance,22250.0
+2022,North East,L,Real estate,16000.0
+2022,North East,M,Professional and technical,61250.0
+2022,North East,N,Administrative services,85000.0
+2022,North East,O,Public administration,76000.0
+2022,North East,P,Education,107000.0
+2022,North East,Q,Health and social work,171000.0
+2022,North East,R,Arts and recreation,22500.0
+2022,North East,S,Other services,20000.0
+2022,North West,A,Agriculture,12450.0
+2022,North West,B,Mining,3370.0
+2022,North West,C,Manufacturing,312900.0
+2022,North West,D,Energy,10000.0
+2022,North West,E,Water and waste,24750.0
+2022,North West,F,Construction,178000.0
+2022,North West,G,Wholesale and retail,510000.0
+2022,North West,H,Transport and storage,161750.0
+2022,North West,I,Accommodation and food,276000.0
+2022,North West,J,Information and communication,117000.0
+2022,North West,K,Finance and insurance,91000.0
+2022,North West,L,Real estate,56000.0
+2022,North West,M,Professional and technical,327000.0
+2022,North West,N,Administrative services,289000.0
+2022,North West,O,Public administration,174000.0
+2022,North West,P,Education,279000.0
+2022,North West,Q,Health and social work,524000.0
+2022,North West,R,Arts and recreation,75500.0
+2022,North West,S,Other services,64000.0
+2022,South East,A,Agriculture,33000.0
+2022,South East,B,Mining,2400.0
+2022,South East,C,Manufacturing,248900.0
+2022,South East,D,Energy,13000.0
+2022,South East,E,Water and waste,40800.0
+2022,South East,F,Construction,213000.0
+2022,South East,G,Wholesale and retail,639000.0
+2022,South East,H,Transport and storage,205000.0
+2022,South East,I,Accommodation and food,318000.0
+2022,South East,J,Information and communication,261500.0
+2022,South East,K,Finance and insurance,101000.0
+2022,South East,L,Real estate,70000.0
+2022,South East,M,Professional and technical,409000.0
+2022,South East,N,Administrative services,391000.0
+2022,South East,O,Public administration,151000.0
+2022,South East,P,Education,421000.0
+2022,South East,Q,Health and social work,540000.0
+2022,South East,R,Arts and recreation,127000.0
+2022,South East,S,Other services,83000.0
+2022,South West,A,Agriculture,24600.0
+2022,South West,B,Mining,2310.0
+2022,South West,C,Manufacturing,216325.0
+2022,South West,D,Energy,11000.0
+2022,South West,E,Water and waste,25100.0
+2022,South West,F,Construction,139000.0
+2022,South West,G,Wholesale and retail,349000.0
+2022,South West,H,Transport and storage,109800.0
+2022,South West,I,Accommodation and food,251000.0
+2022,South West,J,Information and communication,83250.0
+2022,South West,K,Finance and insurance,73000.0
+2022,South West,L,Real estate,45000.0
+2022,South West,M,Professional and technical,214000.0
+2022,South West,N,Administrative services,182500.0
+2022,South West,O,Public administration,113000.0
+2022,South West,P,Education,240000.0
+2022,South West,Q,Health and social work,368000.0
+2022,South West,R,Arts and recreation,70500.0
+2022,South West,S,Other services,49250.0
+2022,West Midlands,A,Agriculture,17445.0
+2022,West Midlands,B,Mining,850.0
+2022,West Midlands,C,Manufacturing,301550.0
+2022,West Midlands,D,Energy,14000.0
+2022,West Midlands,E,Water and waste,20850.0
+2022,West Midlands,F,Construction,111000.0
+2022,West Midlands,G,Wholesale and retail,397000.0
+2022,West Midlands,H,Transport and storage,173600.0
+2022,West Midlands,I,Accommodation and food,168000.0
+2022,West Midlands,J,Information and communication,76750.0
+2022,West Midlands,K,Finance and insurance,59000.0
+2022,West Midlands,L,Real estate,67000.0
+2022,West Midlands,M,Professional and technical,197000.0
+2022,West Midlands,N,Administrative services,230000.0
+2022,West Midlands,O,Public administration,106000.0
+2022,West Midlands,P,Education,221000.0
+2022,West Midlands,Q,Health and social work,380000.0
+2022,West Midlands,R,Arts and recreation,52000.0
+2022,West Midlands,S,Other services,71000.0
+2022,Yorkshire and The Humber,A,Agriculture,13300.0
+2022,Yorkshire and The Humber,B,Mining,1500.0
+2022,Yorkshire and The Humber,C,Manufacturing,282550.0
+2022,Yorkshire and The Humber,D,Energy,7000.0
+2022,Yorkshire and The Humber,E,Water and waste,20500.0
+2022,Yorkshire and The Humber,F,Construction,115000.0
+2022,Yorkshire and The Humber,G,Wholesale and retail,376000.0
+2022,Yorkshire and The Humber,H,Transport and storage,132800.0
+2022,Yorkshire and The Humber,I,Accommodation and food,180000.0
+2022,Yorkshire and The Humber,J,Information and communication,67550.0
+2022,Yorkshire and The Humber,K,Finance and insurance,71000.0
+2022,Yorkshire and The Humber,L,Real estate,33000.0
+2022,Yorkshire and The Humber,M,Professional and technical,160500.0
+2022,Yorkshire and The Humber,N,Administrative services,217000.0
+2022,Yorkshire and The Humber,O,Public administration,117000.0
+2022,Yorkshire and The Humber,P,Education,225000.0
+2022,Yorkshire and The Humber,Q,Health and social work,368000.0
+2022,Yorkshire and The Humber,R,Arts and recreation,53000.0
+2022,Yorkshire and The Humber,S,Other services,36500.0
+2023,East,A,Agriculture,22600.0
+2023,East,B,Mining,1575.0
+2023,East,C,Manufacturing,208775.0
+2023,East,D,Energy,7000.0
+2023,East,E,Water and waste,21800.0
+2023,East,F,Construction,174000.0
+2023,East,G,Wholesale and retail,432000.0
+2023,East,H,Transport and storage,173500.0
+2023,East,I,Accommodation and food,213000.0
+2023,East,J,Information and communication,97200.0
+2023,East,K,Finance and insurance,57000.0
+2023,East,L,Real estate,61000.0
+2023,East,M,Professional and technical,263000.0
+2023,East,N,Administrative services,319000.0
+2023,East,O,Public administration,101000.0
+2023,East,P,Education,251000.0
+2023,East,Q,Health and social work,360000.0
+2023,East,R,Arts and recreation,69000.0
+2023,East,S,Other services,59000.0
+2023,East Midlands,A,Agriculture,14750.0
+2023,East Midlands,B,Mining,4825.0
+2023,East Midlands,C,Manufacturing,265225.0
+2023,East Midlands,D,Energy,11000.0
+2023,East Midlands,E,Water and waste,13975.0
+2023,East Midlands,F,Construction,91000.0
+2023,East Midlands,G,Wholesale and retail,324000.0
+2023,East Midlands,H,Transport and storage,151250.0
+2023,East Midlands,I,Accommodation and food,150000.0
+2023,East Midlands,J,Information and communication,58000.0
+2023,East Midlands,K,Finance and insurance,30000.0
+2023,East Midlands,L,Real estate,36000.0
+2023,East Midlands,M,Professional and technical,159000.0
+2023,East Midlands,N,Administrative services,160500.0
+2023,East Midlands,O,Public administration,87000.0
+2023,East Midlands,P,Education,192000.0
+2023,East Midlands,Q,Health and social work,311000.0
+2023,East Midlands,R,Arts and recreation,54500.0
+2023,East Midlands,S,Other services,28250.0
+2023,London,A,Agriculture,1375.0
+2023,London,B,Mining,2200.0
+2023,London,C,Manufacturing,119625.0
+2023,London,D,Energy,15000.0
+2023,London,E,Water and waste,17200.0
+2023,London,F,Construction,201000.0
+2023,London,G,Wholesale and retail,572000.0
+2023,London,H,Transport and storage,246000.0
+2023,London,I,Accommodation and food,438000.0
+2023,London,J,Information and communication,522000.0
+2023,London,K,Finance and insurance,434000.0
+2023,London,L,Real estate,152000.0
+2023,London,M,Professional and technical,836000.0
+2023,London,N,Administrative services,577000.0
+2023,London,O,Public administration,256000.0
+2023,London,P,Education,390000.0
+2023,London,Q,Health and social work,606000.0
+2023,London,R,Arts and recreation,151000.0
+2023,London,S,Other services,140000.0
+2023,North East,A,Agriculture,4050.0
+2023,North East,B,Mining,1375.0
+2023,North East,C,Manufacturing,111650.0
+2023,North East,D,Energy,4500.0
+2023,North East,E,Water and waste,10175.0
+2023,North East,F,Construction,55000.0
+2023,North East,G,Wholesale and retail,130000.0
+2023,North East,H,Transport and storage,62750.0
+2023,North East,I,Accommodation and food,86000.0
+2023,North East,J,Information and communication,36850.0
+2023,North East,K,Finance and insurance,21500.0
+2023,North East,L,Real estate,25000.0
+2023,North East,M,Professional and technical,63500.0
+2023,North East,N,Administrative services,77500.0
+2023,North East,O,Public administration,79000.0
+2023,North East,P,Education,105000.0
+2023,North East,Q,Health and social work,182000.0
+2023,North East,R,Arts and recreation,27500.0
+2023,North East,S,Other services,22800.0
+2023,North West,A,Agriculture,16050.0
+2023,North West,B,Mining,2410.0
+2023,North West,C,Manufacturing,316930.0
+2023,North West,D,Energy,9000.0
+2023,North West,E,Water and waste,25100.0
+2023,North West,F,Construction,175000.0
+2023,North West,G,Wholesale and retail,511000.0
+2023,North West,H,Transport and storage,161250.0
+2023,North West,I,Accommodation and food,261000.0
+2023,North West,J,Information and communication,111500.0
+2023,North West,K,Finance and insurance,87000.0
+2023,North West,L,Real estate,62000.0
+2023,North West,M,Professional and technical,350000.0
+2023,North West,N,Administrative services,312000.0
+2023,North West,O,Public administration,173000.0
+2023,North West,P,Education,290000.0
+2023,North West,Q,Health and social work,555000.0
+2023,North West,R,Arts and recreation,85000.0
+2023,North West,S,Other services,66000.0
+2023,South East,A,Agriculture,29250.0
+2023,South East,B,Mining,2000.0
+2023,South East,C,Manufacturing,260235.0
+2023,South East,D,Energy,15000.0
+2023,South East,E,Water and waste,34000.0
+2023,South East,F,Construction,208000.0
+2023,South East,G,Wholesale and retail,651000.0
+2023,South East,H,Transport and storage,199000.0
+2023,South East,I,Accommodation and food,375000.0
+2023,South East,J,Information and communication,234500.0
+2023,South East,K,Finance and insurance,114000.0
+2023,South East,L,Real estate,73000.0
+2023,South East,M,Professional and technical,384000.0
+2023,South East,N,Administrative services,343000.0
+2023,South East,O,Public administration,151000.0
+2023,South East,P,Education,422000.0
+2023,South East,Q,Health and social work,602000.0
+2023,South East,R,Arts and recreation,130000.0
+2023,South East,S,Other services,94000.0
+2023,South West,A,Agriculture,23750.0
+2023,South West,B,Mining,2875.0
+2023,South West,C,Manufacturing,208475.0
+2023,South West,D,Energy,11000.0
+2023,South West,E,Water and waste,26725.0
+2023,South West,F,Construction,154000.0
+2023,South West,G,Wholesale and retail,380000.0
+2023,South West,H,Transport and storage,101150.0
+2023,South West,I,Accommodation and food,252000.0
+2023,South West,J,Information and communication,97750.0
+2023,South West,K,Finance and insurance,72000.0
+2023,South West,L,Real estate,46000.0
+2023,South West,M,Professional and technical,210000.0
+2023,South West,N,Administrative services,180250.0
+2023,South West,O,Public administration,118000.0
+2023,South West,P,Education,220000.0
+2023,South West,Q,Health and social work,387000.0
+2023,South West,R,Arts and recreation,64000.0
+2023,South West,S,Other services,43500.0
+2023,West Midlands,A,Agriculture,18100.0
+2023,West Midlands,B,Mining,755.0
+2023,West Midlands,C,Manufacturing,272850.0
+2023,West Midlands,D,Energy,13000.0
+2023,West Midlands,E,Water and waste,24750.0
+2023,West Midlands,F,Construction,119000.0
+2023,West Midlands,G,Wholesale and retail,413000.0
+2023,West Midlands,H,Transport and storage,164000.0
+2023,West Midlands,I,Accommodation and food,183000.0
+2023,West Midlands,J,Information and communication,81500.0
+2023,West Midlands,K,Finance and insurance,57000.0
+2023,West Midlands,L,Real estate,45000.0
+2023,West Midlands,M,Professional and technical,220000.0
+2023,West Midlands,N,Administrative services,234500.0
+2023,West Midlands,O,Public administration,114000.0
+2023,West Midlands,P,Education,240000.0
+2023,West Midlands,Q,Health and social work,366000.0
+2023,West Midlands,R,Arts and recreation,64000.0
+2023,West Midlands,S,Other services,53500.0
+2023,Yorkshire and The Humber,A,Agriculture,11850.0
+2023,Yorkshire and The Humber,B,Mining,2125.0
+2023,Yorkshire and The Humber,C,Manufacturing,270375.0
+2023,Yorkshire and The Humber,D,Energy,7000.0
+2023,Yorkshire and The Humber,E,Water and waste,18200.0
+2023,Yorkshire and The Humber,F,Construction,122000.0
+2023,Yorkshire and The Humber,G,Wholesale and retail,366000.0
+2023,Yorkshire and The Humber,H,Transport and storage,145650.0
+2023,Yorkshire and The Humber,I,Accommodation and food,191000.0
+2023,Yorkshire and The Humber,J,Information and communication,65500.0
+2023,Yorkshire and The Humber,K,Finance and insurance,73000.0
+2023,Yorkshire and The Humber,L,Real estate,35000.0
+2023,Yorkshire and The Humber,M,Professional and technical,175000.0
+2023,Yorkshire and The Humber,N,Administrative services,208000.0
+2023,Yorkshire and The Humber,O,Public administration,120000.0
+2023,Yorkshire and The Humber,P,Education,236000.0
+2023,Yorkshire and The Humber,Q,Health and social work,358000.0
+2023,Yorkshire and The Humber,R,Arts and recreation,53000.0
+2023,Yorkshire and The Humber,S,Other services,37000.0
+2024,East,A,Agriculture,24200.0
+2024,East,B,Mining,2650.0
+2024,East,C,Manufacturing,208650.0
+2024,East,D,Energy,8000.0
+2024,East,E,Water and waste,21500.0
+2024,East,F,Construction,188000.0
+2024,East,G,Wholesale and retail,430000.0
+2024,East,H,Transport and storage,164900.0
+2024,East,I,Accommodation and food,202000.0
+2024,East,J,Information and communication,92250.0
+2024,East,K,Finance and insurance,51000.0
+2024,East,L,Real estate,67000.0
+2024,East,M,Professional and technical,249000.0
+2024,East,N,Administrative services,339000.0
+2024,East,O,Public administration,109000.0
+2024,East,P,Education,262000.0
+2024,East,Q,Health and social work,366000.0
+2024,East,R,Arts and recreation,71000.0
+2024,East,S,Other services,55000.0
+2024,East Midlands,A,Agriculture,14850.0
+2024,East Midlands,B,Mining,4350.0
+2024,East Midlands,C,Manufacturing,250075.0
+2024,East Midlands,D,Energy,11000.0
+2024,East Midlands,E,Water and waste,15750.0
+2024,East Midlands,F,Construction,121000.0
+2024,East Midlands,G,Wholesale and retail,315000.0
+2024,East Midlands,H,Transport and storage,142500.0
+2024,East Midlands,I,Accommodation and food,154000.0
+2024,East Midlands,J,Information and communication,60800.0
+2024,East Midlands,K,Finance and insurance,35250.0
+2024,East Midlands,L,Real estate,35000.0
+2024,East Midlands,M,Professional and technical,177000.0
+2024,East Midlands,N,Administrative services,169000.0
+2024,East Midlands,O,Public administration,93000.0
+2024,East Midlands,P,Education,184000.0
+2024,East Midlands,Q,Health and social work,306000.0
+2024,East Midlands,R,Arts and recreation,48000.0
+2024,East Midlands,S,Other services,38500.0
+2024,London,A,Agriculture,1175.0
+2024,London,B,Mining,2500.0
+2024,London,C,Manufacturing,114370.0
+2024,London,D,Energy,15000.0
+2024,London,E,Water and waste,17700.0
+2024,London,F,Construction,203000.0
+2024,London,G,Wholesale and retail,617000.0
+2024,London,H,Transport and storage,235500.0
+2024,London,I,Accommodation and food,447000.0
+2024,London,J,Information and communication,554000.0
+2024,London,K,Finance and insurance,446000.0
+2024,London,L,Real estate,143000.0
+2024,London,M,Professional and technical,801000.0
+2024,London,N,Administrative services,572000.0
+2024,London,O,Public administration,263000.0
+2024,London,P,Education,408000.0
+2024,London,Q,Health and social work,623000.0
+2024,London,R,Arts and recreation,148000.0
+2024,London,S,Other services,135000.0
+2024,North East,A,Agriculture,3950.0
+2024,North East,B,Mining,1300.0
+2024,North East,C,Manufacturing,107030.0
+2024,North East,D,Energy,4500.0
+2024,North East,E,Water and waste,10850.0
+2024,North East,F,Construction,60000.0
+2024,North East,G,Wholesale and retail,149000.0
+2024,North East,H,Transport and storage,62000.0
+2024,North East,I,Accommodation and food,81000.0
+2024,North East,J,Information and communication,27500.0
+2024,North East,K,Finance and insurance,21000.0
+2024,North East,L,Real estate,18000.0
+2024,North East,M,Professional and technical,65500.0
+2024,North East,N,Administrative services,73500.0
+2024,North East,O,Public administration,81000.0
+2024,North East,P,Education,109000.0
+2024,North East,Q,Health and social work,190000.0
+2024,North East,R,Arts and recreation,24250.0
+2024,North East,S,Other services,24400.0
+2024,North West,A,Agriculture,12775.0
+2024,North West,B,Mining,1860.0
+2024,North West,C,Manufacturing,310500.0
+2024,North West,D,Energy,13000.0
+2024,North West,E,Water and waste,25000.0
+2024,North West,F,Construction,174000.0
+2024,North West,G,Wholesale and retail,502000.0
+2024,North West,H,Transport and storage,169000.0
+2024,North West,I,Accommodation and food,268000.0
+2024,North West,J,Information and communication,107000.0
+2024,North West,K,Finance and insurance,87000.0
+2024,North West,L,Real estate,69000.0
+2024,North West,M,Professional and technical,344000.0
+2024,North West,N,Administrative services,312000.0
+2024,North West,O,Public administration,184000.0
+2024,North West,P,Education,296000.0
+2024,North West,Q,Health and social work,570000.0
+2024,North West,R,Arts and recreation,83000.0
+2024,North West,S,Other services,58000.0
+2024,South East,A,Agriculture,33600.0
+2024,South East,B,Mining,2075.0
+2024,South East,C,Manufacturing,249550.0
+2024,South East,D,Energy,15000.0
+2024,South East,E,Water and waste,39750.0
+2024,South East,F,Construction,234000.0
+2024,South East,G,Wholesale and retail,651000.0
+2024,South East,H,Transport and storage,209000.0
+2024,South East,I,Accommodation and food,335000.0
+2024,South East,J,Information and communication,240500.0
+2024,South East,K,Finance and insurance,107000.0
+2024,South East,L,Real estate,78000.0
+2024,South East,M,Professional and technical,400000.0
+2024,South East,N,Administrative services,357000.0
+2024,South East,O,Public administration,154000.0
+2024,South East,P,Education,420000.0
+2024,South East,Q,Health and social work,586000.0
+2024,South East,R,Arts and recreation,113000.0
+2024,South East,S,Other services,87000.0
+2024,South West,A,Agriculture,24200.0
+2024,South West,B,Mining,2525.0
+2024,South West,C,Manufacturing,215550.0
+2024,South West,D,Energy,12000.0
+2024,South West,E,Water and waste,23125.0
+2024,South West,F,Construction,132000.0
+2024,South West,G,Wholesale and retail,362000.0
+2024,South West,H,Transport and storage,114200.0
+2024,South West,I,Accommodation and food,271000.0
+2024,South West,J,Information and communication,102500.0
+2024,South West,K,Finance and insurance,73000.0
+2024,South West,L,Real estate,43000.0
+2024,South West,M,Professional and technical,225000.0
+2024,South West,N,Administrative services,176000.0
+2024,South West,O,Public administration,124000.0
+2024,South West,P,Education,226000.0
+2024,South West,Q,Health and social work,391000.0
+2024,South West,R,Arts and recreation,61000.0
+2024,South West,S,Other services,49500.0
+2024,West Midlands,A,Agriculture,17875.0
+2024,West Midlands,B,Mining,630.0
+2024,West Midlands,C,Manufacturing,258600.0
+2024,West Midlands,D,Energy,14000.0
+2024,West Midlands,E,Water and waste,21100.0
+2024,West Midlands,F,Construction,107000.0
+2024,West Midlands,G,Wholesale and retail,405000.0
+2024,West Midlands,H,Transport and storage,171500.0
+2024,West Midlands,I,Accommodation and food,187000.0
+2024,West Midlands,J,Information and communication,74750.0
+2024,West Midlands,K,Finance and insurance,56000.0
+2024,West Midlands,L,Real estate,46000.0
+2024,West Midlands,M,Professional and technical,210000.0
+2024,West Midlands,N,Administrative services,233000.0
+2024,West Midlands,O,Public administration,118000.0
+2024,West Midlands,P,Education,237000.0
+2024,West Midlands,Q,Health and social work,403000.0
+2024,West Midlands,R,Arts and recreation,60000.0
+2024,West Midlands,S,Other services,51000.0
+2024,Yorkshire and The Humber,A,Agriculture,11550.0
+2024,Yorkshire and The Humber,B,Mining,1575.0
+2024,Yorkshire and The Humber,C,Manufacturing,261050.0
+2024,Yorkshire and The Humber,D,Energy,8000.0
+2024,Yorkshire and The Humber,E,Water and waste,22250.0
+2024,Yorkshire and The Humber,F,Construction,134000.0
+2024,Yorkshire and The Humber,G,Wholesale and retail,363000.0
+2024,Yorkshire and The Humber,H,Transport and storage,133300.0
+2024,Yorkshire and The Humber,I,Accommodation and food,182000.0
+2024,Yorkshire and The Humber,J,Information and communication,61500.0
+2024,Yorkshire and The Humber,K,Finance and insurance,67000.0
+2024,Yorkshire and The Humber,L,Real estate,34000.0
+2024,Yorkshire and The Humber,M,Professional and technical,188000.0
+2024,Yorkshire and The Humber,N,Administrative services,212000.0
+2024,Yorkshire and The Humber,O,Public administration,124000.0
+2024,Yorkshire and The Humber,P,Education,225000.0
+2024,Yorkshire and The Humber,Q,Health and social work,368000.0
+2024,Yorkshire and The Humber,R,Arts and recreation,59000.0
+2024,Yorkshire and The Humber,S,Other services,44500.0

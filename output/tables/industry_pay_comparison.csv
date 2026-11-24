@@ -1,0 +1,20 @@
+year,vintage,sector,sector_label,north_west_gbp_hour,west_midlands_gbp_hour,north_west_cv_pct,west_midlands_cv_pct,passes_cv_5pct_in_both,gap_gbp_hour
+2025,revised,A,Agriculture,14.96,14.02,6.9,3.5,0,
+2025,revised,B,Mining,,,,,0,
+2025,revised,C,Manufacturing,20.47,19.43,2.7,2.0,1,1.0399999999999991
+2025,revised,D,Energy,22.93,23.75,8.3,17.0,0,
+2025,revised,E,Water and waste,19.95,19.2,6.7,6.4,0,
+2025,revised,F,Construction,20.91,18.87,4.0,4.4,1,2.039999999999999
+2025,revised,G,Wholesale and retail,15.52,15.84,1.4,1.6,1,-0.3200000000000003
+2025,revised,H,Transport and storage,16.89,16.79,2.6,2.7,1,0.10000000000000142
+2025,revised,I,Accommodation and food,14.0,14.39,1.6,3.5,1,-0.39000000000000057
+2025,revised,J,Information and communication,23.22,24.41,4.1,4.7,1,-1.1900000000000013
+2025,revised,K,Finance and insurance,21.53,22.08,4.4,5.2,0,
+2025,revised,L,Real estate,17.31,17.82,3.5,5.6,0,
+2025,revised,M,Professional and technical,21.84,20.31,2.8,4.8,1,1.5300000000000011
+2025,revised,N,Administrative services,15.95,16.48,2.3,3.4,1,-0.5300000000000011
+2025,revised,O,Public administration,20.01,20.47,2.2,2.0,1,-0.4599999999999973
+2025,revised,P,Education,22.32,21.92,2.7,2.7,1,0.3999999999999986
+2025,revised,Q,Health and social work,18.83,17.29,1.2,3.0,1,1.5399999999999991
+2025,revised,R,Arts and recreation,15.84,16.69,5.3,6.1,0,
+2025,revised,S,Other services,16.9,16.62,6.0,6.2,0,

@@ -1,75 +1,87 @@
 # UK Regional Labour Market Analysis
 
-How have employment and economic inactivity differed between the North West and West Midlands? This comparison uses ONS Annual Population Survey estimates for people aged 16–64, covering annual periods ending from March 2015 to June 2026.
+Employment, pay and industrial change in the North West and West Midlands. How have the two regions changed since 2019, and how much of their employee job growth gap is associated with their initial industry mix?
 
 ## Findings
 
-For July 2025–June 2026, the latest period in the included data:
+| Measure | North West | West Midlands |
+|---|---:|---:|
+| Payrolled employees, September 2026: change from 2019 average | +5.65% | +5.44% |
+| Workplace employee jobs, 2019–2024: growth in covered industries | +5.29% | +3.09% |
+| Median hourly pay excluding overtime, April 2026 | £17.79 | £17.72 |
 
-| Indicator | North West | West Midlands | Difference |
-|---|---:|---:|---:|
-| Employment rate | 74.3% | 73.5% | +0.8 pp |
-| Economic inactivity rate | 22.4% | 22.0% | +0.4 pp |
+PAYE counts people by residence. BRES counts jobs by workplace. ASHE measures pay for eligible employee jobs, and the 2026 estimates are provisional. The different coverage and reference periods matter when comparing the results.
 
-Differences are North West minus West Midlands, in percentage points.
+### Where job growth differed
 
-- Both employment rates were slightly below their calendar-2019 estimates: by 0.2 percentage points in the North West and 0.4 in the West Midlands.
-- The employment ranking has changed over time. The North West's rate was 1.8 points below the West Midlands in April 2023–March 2024, compared with 0.8 points above in the latest window.
-- Inactivity was 22.3% in both regions in 2019. The latest estimates were 0.1 points higher in the North West and 0.3 points lower in the West Midlands.
+The BRES employee job growth gap was **2.20 percentage points**. A shift-share decomposition assigns **0.60 points** to differences in initial industry mix and **1.59 points** to differences in growth within industry sections.
 
-![Employment and inactivity gaps between the two regions](output/figures/regional_gaps.png)
+![Decomposition of employee job growth](output/figures/shift_share.png)
 
-These are differences between survey estimates, without a test of statistical significance. The [full findings](documents/findings.md) give the baseline comparisons and historical ranges.
+Manufacturing contributed +1.55 percentage points to the North West minus West Midlands growth gap. Transport and storage contributed −1.33 points, and wholesale and retail −1.12 points. The [industry contribution chart](output/figures/sector_contributions.png) shows all 19 sections.
 
-## Data and interpretation
+The North West growth advantage remains positive when changing the baseline year, end year, benchmark and industry grouping. Its size and the allocation between components change. These are descriptive accounting results; the remainder does not identify the effect of regional policy or competitiveness.
 
-Source: [ONS Annual Population Survey via Nomis](https://www.nomisweb.co.uk/datasets/apsnew), dataset `NM_17_5`. The included download, retrieved on 24 November 2026, contains 184 observations across 46 survey periods. The [data notes](data/README.md) describe the source query, fields and snapshot.
+### A smaller difference in resident payroll growth
 
-The two English regions form a descriptive case study. They are not matched controls, and the comparison does not explain the causes of their differences. Calendar 2019 provides a fixed pre-pandemic reference.
+![Indexed payrolled employment](output/figures/paye_recovery.png)
 
-Each estimate covers 12 months; neighbouring windows overlap. Employment and inactivity share the population aged 16–64 as their denominator, but inactivity is distinct from unemployment. The level charts include the published approximate 95% confidence intervals:
+The two PAYE paths are close. Using 2024 annual averages gives growth from 2019 of 5.93% in the North West and 5.73% in the West Midlands. The larger BRES workplace job growth gap therefore does not carry over directly to resident payroll counts.
 
-![Regional employment rates](output/figures/employment.png)
+### Hourly pay and employment rates
 
-![Regional economic inactivity rates](output/figures/inactivity.png)
+![Hourly pay and inflation-adjusted change](output/figures/hourly_pay.png)
 
-ONS advises caution when interpreting APS changes because of reduced sample sizes and increased volatility; see the [survey methodology](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/annualpopulationsurveyapsqmi). The gap chart does not supply confidence intervals for differences between regions or periods.
+All-employee median hourly pay was £17.79 and £17.72 in April 2026. Compared with April 2019, the corresponding CPIH-adjusted changes were +8.34% and +8.00%. These are changes in workforce medians, rather than the pay growth of the same workers.
 
-## Reproduce the results
+In the original APS comparison, the latest employment-rate gap was +0.8 percentage points and the inactivity-rate gap +0.4. Neither is significant at 5% under an approximate test using published confidence margins and zero cross-region covariance, including Holm adjustment for the two indicators. This does not establish equivalence between the regions.
 
-Requires Python 3.12 or newer and Matplotlib. Tested with Python 3.14.4 and Matplotlib 3.10.9.
+[Full findings](documents/findings.md) · [Methods and assumptions](documents/methods.md) · [Data definitions and provenance](data/README.md)
+
+## Data
+
+| Source | Coverage in this snapshot | Role |
+|---|---|---|
+| [ONS APS via Nomis](https://www.nomisweb.co.uk/datasets/apsnew) | Annual windows ending March 2015–June 2026 | Resident employment and inactivity, ages 16–64 |
+| [HMRC / ONS PAYE RTI](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/realtimeinformationstatisticsreferencetableseasonallyadjusted) | July 2014–October 2026, seasonally adjusted | Monthly resident payrolled employee counts |
+| [ONS BRES via Nomis](https://www.nomisweb.co.uk/datasets/newbres6pub) | 2018–2024, nine English regions | Workplace employee jobs and industry decomposition |
+| [ONS ASHE Table 5.6a/b](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/regionbyindustry2digitsicashetable5) | Revised 2019, 2024, 2025; provisional 2026 | Hourly pay excluding overtime and its quality measures |
+| [ONS CPIH, L522](https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l522/mm23) | Matching monthly price indices | Express April pay in April 2019 prices |
+
+The included inputs were retrieved on 24 November 2026. September is the main PAYE endpoint; October early estimates are shown separately. BRES 2024 is provisional and is the latest year available in the downloaded API response. A UK price index adjusts for inflation over time, not regional living costs.
+
+## Reproduce
+
+Python 3.12 or newer is required. The analysis uses Matplotlib and the Python standard library.
 
 ```sh
 python -m pip install -r requirements.txt
-python code/python/analyse.py
+python code/python/research.py
 python -m unittest discover -s tests -v
 ```
 
-The default run uses the included snapshot and makes no network requests. It checks the source hash and definitions, cleans the observations, compares periods in an in-memory SQLite database, and regenerates the tables, figures and findings. Missing or non-normal observations remain missing.
+The default run is offline. It verifies the included data hashes and regenerates the analysis tables, PNG/SVG figures and findings. Use `--output-dir <directory>` to write a separate copy of the results.
 
-To download current estimates, or compare another pair of English regions:
+The [prepared inputs](data/extended/) include source rows or cells and quality flags. To rebuild them from the pinned original downloads:
 
 ```sh
-python code/python/analyse.py --fetch
-python code/python/analyse.py --fetch --regions 2013265921 2013265923 --start 2019-01
+python -m pip install -r requirements-sources.txt
+python code/python/prepare_sources.py --fetch
 ```
 
-The second command compares the North East with Yorkshire and The Humber. Fresh downloads are saved separately under `data/local/`; their results go to `output/local/`. These folders are excluded from Git. A new download may contain revised estimates.
+Original files are cached under `data/local/extension/`. Their hashes must match the recorded vintage. Revised downloads require a reviewed source manifest; they do not silently replace the included snapshot.
 
-Use `--snapshot <directory>` to rerun a saved download, `--baseline YYYY-MM` to select an exact baseline period end, or `--output-dir <directory>` to choose where results are written. The script stops if source definitions change or the download is incomplete. If a baseline is unavailable, its changes remain blank.
+The APS-only script remains available as `python code/python/analyse.py`. Its `--fetch` and `--regions` options apply to that comparison. The expanded study uses a fixed North West–West Midlands specification.
 
-## Outputs
+## Tables
 
-| File | Contents |
-|---|---|
-| [observations.csv](output/tables/observations.csv) | Full cleaned series, source status flags and confidence measures |
-| [period_comparisons.csv](output/tables/period_comparisons.csv) | Regional rates and gaps for every common valid period |
-| [latest_comparison.csv](output/tables/latest_comparison.csv) | Latest common valid period for each indicator |
-| [baseline_changes.csv](output/tables/baseline_changes.csv) | Changes in rates and gaps relative to 2019 |
-| [findings.md](documents/findings.md) | Results and interpretation |
+- [PAYE growth comparisons](output/tables/paye_summary.csv)
+- [Shift-share results and sensitivity cases](output/tables/shift_share_summary.csv)
+- [Contributions to the regional growth gap](output/tables/sector_gap_contributions.csv)
+- [Hourly pay comparisons](output/tables/hourly_pay_comparison.csv)
+- [Pay within industries](output/tables/industry_pay_comparison.csv)
+- [Approximate APS tests](output/tables/aps_gap_tests.csv)
 
-The analysis code is in [Python](code/python/analyse.py), with SQL queries for [all periods](code/sql/period_comparisons.sql) and the [latest comparison](code/sql/latest_comparison.sql).
-
-Source: Office for National Statistics via Nomis. Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). See [Nomis copyright](https://www.nomisweb.co.uk/home/copyright.asp).
+Source: Office for National Statistics and HMRC via ONS and Nomis. Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). See [Nomis copyright](https://www.nomisweb.co.uk/home/copyright.asp).
 
 Code developed with AI assistance.
