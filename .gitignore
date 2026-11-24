@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+data/raw/*
+!data/raw/.gitkeep
+data/clean/*
+!data/clean/.gitkeep
+data/latest_snapshot.json
+*.sqlite
+*.sqlite-*
+*.db
