@@ -69,6 +69,30 @@ The denominator is the sum of published division counts in A–S. The separately
 
 [ONS BRES definitions and methods](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/businessregisterandemploymentsurveybres).
 
+### Annual path and timing of the growth gap
+
+The annual path uses all available BRES years from 2018 to 2024 and the same summed A–S counts as the decomposition. `bres_growth_path.csv` contains regional counts, an index with 2019 = 100, cumulative growth and conventional year-on-year growth. The gap table begins at the 2019 baseline.
+
+Let E(r,t) denote the covered regional job count and E(r,2019) its fixed baseline. The cumulative regional growth gap is:
+
+D(t) = 100 × [E(NW,t)/E(NW,2019) − E(WM,t)/E(WM,2019)].
+
+For each year after 2019, the annual contribution is D(t) − D(t−1). The industry-specific contribution is:
+
+A(i,t) = 100 × {[e(NW,i,t) − e(NW,i,t−1)]/E(NW,2019) − [e(WM,i,t) − e(WM,i,t−1)]/E(WM,2019)}.
+
+Summing A(i,t) over industries gives the annual gap contribution. Summing over 2020–2024 gives the endpoint growth gap. Summing one industry's annual contributions gives its contribution to the 2019–2024 gap. These identities are checked in the code. Annual contributions use fixed denominators; they are not differences of year-on-year growth rates, which use the preceding year's employment.
+
+The 2018–2019 change is reported separately to explain why the earlier baseline matters. A 2018-based endpoint growth gap uses different denominators and is not obtained by simply adding an annual growth-rate difference to the 2019-based gap. Sensitivity concerns the size as well as the sign of the estimates. The annual data describe timing without identifying event or policy effects; survey variation and business reporting can also affect movements.
+
+### Manufacturing profiles and regional context
+
+`manufacturing_divisions.csv` retains all 24 manufacturing divisions (10–33) in both regions. It reports 2019 and 2024 counts, job changes, division growth rates, baseline shares of manufacturing, baseline shares of total covered jobs and contributions to regional growth. A division with no baseline jobs has no percentage growth rate; any new jobs still contribute to regional growth.
+
+Manufacturing shares use the sum of divisions 10–33, while growth contributions use all covered A–S baseline jobs. Changes summed over manufacturing divisions reconcile to the section-C contribution. The background table illustrates food, chemicals, fabricated metals and motor vehicles; these divisions were chosen to describe industrial profiles, not ranked as the largest contributors.
+
+Historical ONS industry and Census articles provide context only. Their dates, geographic coverage and workplace/residence definitions are kept separate from the BRES analysis. All project estimates concern the full North West and West Midlands statistical regions. City-region, metropolitan-county and combined-authority figures are not substituted for them.
+
 ## ASHE: hourly pay and inflation
 
 The measure is median hourly pay excluding overtime from Table 5.6a. Table 5.6b supplies the corresponding coefficient of variation (CV). Separate estimates are retained for all, full-time and part-time employee jobs.

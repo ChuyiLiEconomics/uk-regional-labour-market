@@ -12,6 +12,7 @@ import math
 from pathlib import Path
 
 import analyse
+from industry_patterns import annual_changes, manufacturing_changes
 
 ROOT = Path(__file__).resolve().parents[2]
 FOCUS = ["North West", "West Midlands"]
@@ -316,6 +317,8 @@ def run(output_dir: Path | None = None) -> dict:
     tables, manifest = load_inputs(ROOT / "data/extended")
     paye_series, paye_summary = paye_analysis(tables["paye"])
     sectors, reconciliation = aggregate_bres(tables["bres"])
+    annual_path, annual_gaps, annual_sectors = annual_changes(sectors, FOCUS)
+    manufacturing = manufacturing_changes(tables["bres"], sectors, FOCUS)
     divisions = [{**r, "sector": r["division"], "sector_label": r["division_label"]}
                  for r in tables["bres"] if sector_for(r["division"])]
     details, decompositions = [], []
@@ -361,6 +364,8 @@ def run(output_dir: Path | None = None) -> dict:
                "bres_reconciliation": reconciliation, "shift_share_industries": details,
                "shift_share_gap": gaps, "sector_gap_contributions": sector_gaps,
                "within_section_composition": nested,
+               "bres_growth_path": annual_path, "bres_annual_gaps": annual_gaps,
+               "bres_annual_sector_contributions": annual_sectors, "manufacturing_divisions": manufacturing,
                "shift_share_summary": decompositions, "hourly_pay": earnings, "hourly_pay_comparison": earnings_comparison,
                "industry_pay_comparison": industry_pay, "aps_gap_tests": tests}
     for name, rows in outputs.items():

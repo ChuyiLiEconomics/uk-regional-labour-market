@@ -14,6 +14,7 @@ import analyse
 import research
 import prepare_sources
 import reporting
+import industry_patterns
 
 
 def sector_fixture():
@@ -27,6 +28,52 @@ def sector_fixture():
 
 
 class ResearchTests(unittest.TestCase):
+    def test_annual_contributions_use_fixed_baselines_and_telescope(self):
+        fixture = []
+        changes = {2018: 0, 2019: 0, 2020: -20, 2021: 20, 2022: 10, 2023: 10, 2024: 30}
+        for row in [r for r in sector_fixture() if r['year'] == 2019]:
+            for year in changes:
+                value = 100 + (changes[year] if row['region'] == 'North West' and row['sector'] == 'C' else 0)
+                fixture.append({**row, 'year': year, 'employees': value, 'sector_label': row['sector']})
+        paths, gaps, sectors = industry_patterns.annual_changes(fixture, research.FOCUS)
+        self.assertEqual(len(paths), 14)
+        self.assertAlmostEqual(gaps[-1]['growth_gap_pp'], 100 * 30 / 1900)
+        self.assertAlmostEqual(gaps[2]['annual_gap_contribution_pp'], 100 * 40 / 1900)
+        self.assertAlmostEqual(sum(r['annual_gap_contribution_pp'] for r in gaps[1:]), gaps[-1]['growth_gap_pp'])
+        self.assertAlmostEqual(sum(r['growth_gap_contribution_pp'] for r in sectors), gaps[-1]['growth_gap_pp'])
+        for row in sectors:
+            if row['sector'] != 'C':
+                self.assertEqual(row['growth_gap_contribution_pp'], 0)
+        with self.assertRaisesRegex(ValueError, 'Incomplete annual'):
+            industry_patterns.annual_changes(fixture[1:], research.FOCUS)
+        with self.assertRaisesRegex(ValueError, 'continuous annual'):
+            industry_patterns.annual_changes([r for r in fixture if r['year'] != 2022], research.FOCUS)
+
+    def test_manufacturing_new_jobs_do_not_create_a_growth_rate_from_zero(self):
+        divisions, sections = [], []
+        for name in research.FOCUS:
+            for year in [2019, 2024]:
+                sections.append({'region': name, 'year': year, 'employees': 200 if year == 2019 else 210})
+                for code in ['10', '29']:
+                    divisions.append({'region': name, 'year': year, 'division': code, 'division_label': code,
+                                      'employees': (0 if year == 2019 else 10) if code == '10' else 100})
+        rows = industry_patterns.manufacturing_changes(divisions, sections, research.FOCUS)
+        birth = rows[0]
+        self.assertIsNone(birth['growth_pct'])
+        self.assertEqual(birth['change_jobs'], 10)
+        self.assertEqual(birth['growth_contribution_pp'], 5)
+        with self.assertRaisesRegex(ValueError, 'Incomplete manufacturing'):
+            industry_patterns.manufacturing_changes(divisions[:-1], sections, research.FOCUS)
+
+    def test_timing_description_follows_a_reversing_path(self):
+        rows = [{'year': 2022, 'growth_gap_pp': 1, 'annual_gap_contribution_pp': None},
+                {'year': 2023, 'growth_gap_pp': 3, 'annual_gap_contribution_pp': 2},
+                {'year': 2024, 'growth_gap_pp': -2, 'annual_gap_contribution_pp': -5}]
+        text = reporting.timing_summary(rows)
+        self.assertIn('both widening and narrowing', text)
+        self.assertIn('from +1.00 to -2.00', text)
+        self.assertIn('change of -3.00', text)
+
     def test_uniform_growth_has_no_mix_or_within_component(self):
         _, summaries = research.shift_share(sector_fixture(), 2019, 2024)
         for row in summaries:
@@ -192,7 +239,7 @@ class ResearchTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory, patch.object(analyse, "download", side_effect=AssertionError("Network used")), patch.object(reporting, "findings", side_effect=capture_report):
             result = research.run(Path(directory))
             self.assertEqual(result["source_rows"], {"bres": 5607, "paye": 1332, "ashe": 480, "cpih": 106})
-            for name in ["paye_recovery", "hourly_pay", "shift_share", "sector_contributions"]:
+            for name in ["paye_recovery", "hourly_pay", "shift_share", "sector_contributions", "bres_timing"]:
                 for extension in ["png", "svg"]:
                     self.assertTrue((Path(directory) / "figures" / f"{name}.{extension}").is_file())
             text = (Path(directory) / "findings.md").read_text(encoding="utf-8")
@@ -201,6 +248,12 @@ class ResearchTests(unittest.TestCase):
             self.assertIn("84 active", text)
             self.assertNotIn(str(PROJECT), text)
         tables, aps, manifest, local = reports[0]
+        self.assertEqual(len(tables['bres_annual_sector_contributions']), 95)
+        self.assertEqual(len(tables['manufacturing_divisions']), 48)
+        for row in tables['shift_share_industries']:
+            if row['case'] == '2019-2024_england_sections' and row['industry'] == 'C':
+                contributions = [r for r in tables['manufacturing_divisions'] if r['region'] == row['region']]
+                self.assertAlmostEqual(sum(r['growth_contribution_pp'] for r in contributions), row['actual_growth_contribution_pp'])
         coarse, fine = [next(r for r in tables["shift_share_gap"] if r["case"] == c)
                         for c in ["2019-2024_england_sections", "2019-2024_england_divisions"]]
         self.assertAlmostEqual(coarse["growth_gap_pp"], fine["growth_gap_pp"])
@@ -212,8 +265,13 @@ class ResearchTests(unittest.TestCase):
         revised_text = original(tables, aps, manifest, local)
         self.assertIn("for: employment", revised_text)
         self.assertIn("+3.7 percentage points", revised_text)
-        self.assertIn("Agriculture: +8.76", revised_text)
+        self.assertRegex(revised_text, r'\| Agriculture \|[^\n]+\+8\.76 \|')
         self.assertNotIn("None of the available comparisons", revised_text)
+        self.assertIn('Manufacturing employment fell in both regions', revised_text)
+        manufacturing = next(r for r in tables['shift_share_industries'] if r['case'] == '2019-2024_england_sections' and
+                             r['industry'] == 'C' and r['region'] == 'North West')
+        manufacturing['end_employees'] = manufacturing['baseline_employees'] + 100
+        self.assertNotIn('Manufacturing employment fell in both regions', original(tables, aps, manifest, local))
 
 
 if __name__ == "__main__":

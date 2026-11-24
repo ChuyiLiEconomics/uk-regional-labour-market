@@ -4,6 +4,8 @@ Employment, pay and industrial change in the North West and West Midlands. How h
 
 Manufacturing accounted for 9.2% of covered employee jobs in the North West and 11.6% in the West Midlands in 2019. The comparison examines whether this difference in industry structure helps account for their subsequent employment growth. It is a two-region case study, without a treatment or control group.
 
+The industrial profiles also differ within manufacturing. Motor vehicles represented 6.1% of manufacturing jobs in the North West and 17.6% in the West Midlands in the 2019 baseline. [Earlier ONS analysis](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/thespatialdistributionofindustriesingreatbritain/2015) documented the West Midlands’ motor-vehicle specialism and chemical-manufacturing clusters in the North West. [ONS Census analysis](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/howindustrieshavechangedatalocallevelbetweencensuses/2022-12-08) adds background on growth in Midlands transport and warehousing. The [full findings](documents/findings.md#regional-background) distinguish this historical context from the project’s own estimates.
+
 ## Findings
 
 | Measure | North West | West Midlands |
@@ -20,11 +22,27 @@ The BRES employee job growth gap was **2.20 percentage points**. A shift-share d
 
 ![Decomposition of employee job growth](output/figures/shift_share.png)
 
-Manufacturing contributed +1.55 percentage points to the North West minus West Midlands growth gap. Transport and storage contributed −1.33 points, and wholesale and retail −1.12 points. The [industry contribution chart](output/figures/sector_contributions.png) shows all 19 sections.
+Manufacturing contributed +1.55 percentage points to the North West minus West Midlands growth gap. This came from different job losses: manufacturing employment fell from 314,000 to 310,500 in the North West (−1.1%) and from 301,350 to 258,600 in the West Midlands (−14.2%).
+
+Transport and storage moved in the opposite direction, falling 11.7% in the North West and rising 11.3% in the West Midlands. Its contribution to the gap was −1.33 points; wholesale and retail contributed −1.12 points. The [industry contribution chart](output/figures/sector_contributions.png) shows all 19 sections.
 
 Using **84 active two-digit industries** instead of 19 sections reduces the industry-mix contribution from **0.60 to 0.35 points** and increases the remainder from **1.59 to 1.85 points**. Finer industry composition therefore does not account for most of the gap in this decomposition. The [nested comparison](output/tables/within_section_composition.csv) shows where the allocation changes, including offsetting contributions within manufacturing and transport.
 
-The North West growth advantage remains positive when changing the baseline year, end year, benchmark and industry grouping. Its size and the allocation between components change. These are descriptive accounting results; the remainder does not identify the effect of regional policy or competitiveness.
+Across the six reported endpoint specifications, the North West growth advantage ranges from 1.22 to 4.06 percentage points. The allocation between components also changes. These are descriptive accounting results; the remainder does not identify the effect of regional policy or competitiveness.
+
+### When the gap emerged
+
+The annual path includes reversals. Each figure below compares cumulative job growth from the same 2019 baseline:
+
+| Year | North West minus West Midlands growth gap (pp) |
+|---|---:|
+| 2020 | −1.64 |
+| 2021 | +0.47 |
+| 2022 | −0.47 |
+| 2023 | +1.22 |
+| 2024 | +2.20 |
+
+The gap widened by 2.66 points between 2022 and 2024. The final year contributed 0.98 points to the 2019–2024 gap. Starting in 2018 instead produces a 4.06-point gap, while ending in 2023 gives 1.22 points: the magnitude is sensitive to the window. The [annual chart](output/figures/bres_timing.png) and [industry contributions by year](output/tables/bres_annual_sector_contributions.csv) locate these changes in the published series, without attributing them to particular events or policies.
 
 ### A smaller difference in resident payroll growth
 
@@ -83,6 +101,9 @@ The APS-only script remains available as `python code/python/analyse.py`. Its `-
 - [Shift-share results and sensitivity cases](output/tables/shift_share_summary.csv)
 - [Contributions to the regional growth gap](output/tables/sector_gap_contributions.csv)
 - [Finer industry composition within sections](output/tables/within_section_composition.csv)
+- [Annual workplace job growth and gaps](output/tables/bres_annual_gaps.csv)
+- [Annual industry contributions](output/tables/bres_annual_sector_contributions.csv)
+- [Manufacturing profiles and job changes](output/tables/manufacturing_divisions.csv)
 - [Hourly pay comparisons](output/tables/hourly_pay_comparison.csv)
 - [Pay within industries](output/tables/industry_pay_comparison.csv)
 - [Approximate APS tests](output/tables/aps_gap_tests.csv)

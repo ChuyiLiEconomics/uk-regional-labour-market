@@ -51,6 +51,10 @@ Only status A with a finite numeric value is used. Other statuses and blank valu
 
 The analysis sums divisions into sections A–S. T–U observations and the official total are retained in the input, but are outside the decomposition denominator. The [reconciliation export](../output/tables/bres_reconciliation.csv) shows the industry sum, the separately published total and their difference. Source rounding is preserved.
 
+The annual path uses the same counts, with fixed 2019 regional denominators for additive growth-gap contributions. [Manufacturing divisions](../output/tables/manufacturing_divisions.csv) retain endpoint counts and distinguish shares of manufacturing from shares of all covered jobs. No additional employment dataset is introduced for these outputs.
+
+Historical context comes from ONS articles on [2015 industrial geography](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/thespatialdistributionofindustriesingreatbritain/2015), published 28 March 2017, and [2011–2021 Census industry changes](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/howindustrieshavechangedatalocallevelbetweencensuses/2022-12-08), published 8 December 2022. These pages were consulted on 24 November 2026; they do not change the vintage of the included numerical inputs.
+
 ### PAYE RTI
 
 `period` is the month, YYYY-MM. `payrolled_employees` counts people paid through payroll, allocated by residence. `is_early` is 1 for October 2026 and 0 for older months. `source_sheet` and `source_cell` identify the source value.

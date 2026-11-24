@@ -113,6 +113,35 @@ def charts(destination, tables):
              "Each region uses its own 2019 employment denominator. These contributions are descriptive.", fontsize=8.5)
     save(fig, "sector_contributions")
 
+    fig, axes = plt.subplots(1, 2, figsize=(11, 5.8))
+    fig.subplots_adjust(left=0.09, right=0.98, top=0.84, bottom=0.24, wspace=0.28)
+    for name in ["North West", "West Midlands"]:
+        rows = [r for r in tables['bres_growth_path'] if r['region'] == name]
+        axes[0].plot([r['year'] for r in rows], [r['index_baseline_100'] for r in rows],
+                     color=COLORS[name], marker='o', markersize=4, linewidth=2, label=name)
+    axes[0].axhline(100, color='#BBBBBB', linewidth=1)
+    axes[0].set_title('Workplace employee jobs', loc='left', fontsize=12, fontweight='bold', pad=14)
+    axes[0].set_ylabel('Index (2019 = 100)')
+    axes[0].legend(frameon=False, fontsize=9, loc='upper left')
+    gaps = tables['bres_annual_gaps']
+    changes = [r for r in gaps if r['annual_gap_contribution_pp'] is not None]
+    axes[1].bar([r['year'] for r in changes], [r['annual_gap_contribution_pp'] for r in changes],
+                color='#BAC5D1', width=0.55, label='Annual contribution')
+    axes[1].plot([r['year'] for r in gaps], [r['growth_gap_pp'] for r in gaps],
+                 color='#254B75', marker='o', markersize=4, linewidth=2, label='Cumulative gap')
+    axes[1].axhline(0, color='#777777', linewidth=1)
+    axes[1].set_title('North West minus West Midlands', loc='left', fontsize=12, fontweight='bold', pad=14)
+    axes[1].set_ylabel('Growth gap / contribution (pp)')
+    axes[1].legend(frameon=False, fontsize=9, loc='upper left')
+    for ax in axes:
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True, nbins=6))
+        ax.grid(axis='y', color='#E5E7EB')
+        ax.set_axisbelow(True)
+        ax.margins(y=0.25)
+    footer(fig, 'Source: ONS BRES via Nomis; sums of SIC sections A–S, with rounded source counts.\n'
+                'Annual contributions use fixed 2019 regional denominators and sum to the cumulative growth gap.')
+    save(fig, 'bres_timing')
+
 
 def signed(value):
     return f"{0.0 if abs(value) < 0.005 else value:+.2f}"
@@ -151,6 +180,105 @@ def sensitivity_conclusion(rows):
             "Classification changes the split between composition and the remainder without changing covered job growth.")
 
 
+def timing_summary(rows):
+    end = rows[-1]
+    earlier = rows[-3] if len(rows) >= 3 else rows[0]
+    changes = [r['annual_gap_contribution_pp'] for r in rows if r['annual_gap_contribution_pp'] is not None]
+    path = ('The annual contributions include both widening and narrowing of the gap. '
+            if any(v > 0 for v in changes) and any(v < 0 for v in changes) else '')
+    return (path + f"From {earlier['year']} to {end['year']}, the cumulative gap moved from "
+            f"{signed(earlier['growth_gap_pp'])} to {signed(end['growth_gap_pp'])} percentage points, "
+            f"a change of {signed(end['growth_gap_pp'] - earlier['growth_gap_pp'])} points. "
+            "The endpoint comparison therefore needs to be read alongside the annual path.")
+
+
+def section_pair(tables, sector):
+    return [next(r for r in tables['shift_share_industries'] if r['case'] == '2019-2024_england_sections' and
+                 r['region'] == name and r['industry'] == sector) for name in ['North West', 'West Midlands']]
+
+
+def regional_context(tables):
+    spatial = 'https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/thespatialdistributionofindustriesingreatbritain/2015'
+    census = 'https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/howindustrieshavechangedatalocallevelbetweencensuses/2022-12-08'
+    lines = ['### Regional background', '',
+             f'[ONS analysis of 2015 employee jobs]({spatial}), published in 2017, identified the West Midlands as a '
+             'centre of motor-vehicle manufacturing and chemical-manufacturing concentrations in parts of the North West. '
+             'These are historical features, rather than explanations of the subsequent employment changes.', '',
+             'The project’s own 2019 BRES baseline shows how the regions differ within manufacturing:', '',
+             '| Division | NW jobs | NW share of manufacturing (%) | WM jobs | WM share of manufacturing (%) |',
+             '|---|---:|---:|---:|---:|']
+    for division, label in [('10', 'Food products'), ('20', 'Chemicals'), ('25', 'Fabricated metals'), ('29', 'Motor vehicles')]:
+        a, b = [next(r for r in tables['manufacturing_divisions'] if r['division'] == division and r['region'] == name)
+                for name in ['North West', 'West Midlands']]
+        lines.append(f"| {division}: {label} | {a['baseline_employees']:,.0f} | {a['baseline_share_of_manufacturing_pct']:.1f} | "
+                     f"{b['baseline_employees']:,.0f} | {b['baseline_share_of_manufacturing_pct']:.1f} |")
+    lines += ['', 'These four divisions illustrate the regional profiles; they were not selected as the largest contributors '
+              'to the growth gap. Shares use manufacturing employment as their denominator, rather than all regional jobs. '
+              'The different mixes motivate checking the section-level decomposition against two-digit industries.', '',
+              f'[ONS Census analysis published in 2022]({census}) also documented growth in transport and warehousing '
+              'employment among Midlands residents over 2011–2021. This provides background for examining transport as a '
+              'counterweight to manufacturing in the present comparison. Census resident employment and BRES workplace jobs '
+              'have different populations and periods; their changes are not combined.', '',
+              'The case therefore compares regions with substantial manufacturing employment but different industrial profiles. '
+              'It allows industry composition and within-industry changes to be examined under common national definitions. '
+              'It does not establish why a particular factory, firm or worker changed employment. All results refer to the full '
+              'North West and West Midlands statistical regions, rather than individual cities or combined-authority areas.', '']
+    return lines
+
+
+def industry_discussion(tables, table_prefix):
+    lines = ['The three sections with the largest absolute contributions to the growth gap are:', '',
+             '| Section | NW jobs, 2019 → 2024 | NW change (%) | WM jobs, 2019 → 2024 | WM change (%) | Gap contribution (pp) |',
+             '|---|---:|---:|---:|---:|---:|']
+    for row in sorted(tables['sector_gap_contributions'], key=lambda r: abs(r['growth_gap_contribution_pp']), reverse=True)[:3]:
+        a, b = section_pair(tables, row['sector'])
+        rates = [100 * (r['end_employees'] / r['baseline_employees'] - 1) if r['baseline_employees'] > 0 else None for r in [a, b]]
+        formatted = [signed(v) if v is not None else 'Unavailable' for v in rates]
+        lines.append(f"| {row['sector_label']} | {a['baseline_employees']:,.0f} → {a['end_employees']:,.0f} | {formatted[0]} | "
+                     f"{b['baseline_employees']:,.0f} → {b['end_employees']:,.0f} | {formatted[1]} | {signed(row['growth_gap_contribution_pp'])} |")
+    a, b = section_pair(tables, 'C')
+    if all(r['end_employees'] < r['baseline_employees'] for r in [a, b]):
+        lines += ['', 'Manufacturing employment fell in both regions. Its contribution to the regional growth gap therefore '
+                  'compares job losses, scaled by each region’s total 2019 employment. A positive gap contribution does not '
+                  'mean manufacturing created jobs in the North West.']
+    lines += ['', 'The job changes and sector growth rates answer different questions from the contribution column: '
+              'the latter uses all covered regional baseline jobs as its denominator. The transport and retail comparisons '
+              'show why a manufacturing-only account would miss changes elsewhere in the regional economy.', '',
+              f'[All manufacturing divisions, including endpoint changes]({table_prefix}manufacturing_divisions.csv)', '']
+    return lines
+
+
+def annual_discussion(tables, image_prefix, table_prefix):
+    gaps = tables['bres_annual_gaps']
+    lines = ['### When did the gap emerge?', '', f'![Annual workplace job growth and contributions]({image_prefix}bres_timing.png)', '',
+             '| Year | NW growth from 2019 (%) | WM growth from 2019 (%) | Cumulative gap (pp) | Annual contribution to gap (pp) |',
+             '|---|---:|---:|---:|---:|']
+    for r in gaps:
+        annual = signed(r['annual_gap_contribution_pp']) if r['annual_gap_contribution_pp'] is not None else 'Baseline'
+        lines.append(f"| {r['year']} | {signed(r['north_west_growth_pct'])} | {signed(r['west_midlands_growth_pct'])} | "
+                     f"{signed(r['growth_gap_pp'])} | {annual} |")
+    lines += ['', timing_summary(gaps), '', 'Each annual contribution is the difference between the two regions’ job '
+              'changes divided by their respective fixed 2019 employment totals. Contributions add to the endpoint gap. '
+              'They are not differences between conventional year-on-year percentage growth rates.', '',
+              '| Interval | Largest absolute industry contributions to the annual gap (pp) |', '|---|---|']
+    for year in [r['year'] for r in gaps[1:]]:
+        selected = sorted([r for r in tables['bres_annual_sector_contributions'] if r['end_year'] == year],
+                          key=lambda r: abs(r['growth_gap_contribution_pp']), reverse=True)[:2]
+        descriptions = '; '.join(f"{r['sector_label']} {signed(r['growth_gap_contribution_pp'])}" for r in selected)
+        lines.append(f'| {year - 1}–{year} | {descriptions} |')
+    pre = [r for r in tables['bres_growth_path'] if r['year'] == gaps[0]['year']]
+    lines += ['', f"Before the main window, 2018–2019 job growth was {signed(pre[0]['year_on_year_pct'])}% in the North West "
+              f"and {signed(pre[1]['year_on_year_pct'])}% in the West Midlands. An earlier baseline includes that difference "
+              'and uses different denominators. Ending in 2023 instead of 2024 also omits the final year’s contribution. '
+              'The sensitivity results consequently describe both a stable endpoint sign and a materially changing magnitude.', '',
+              'Annual BRES movements can reflect survey variation, business reporting and classification changes as well as '
+              'economic changes. These estimates locate changes in the published series; they cannot attribute them to the '
+              'pandemic, Brexit, factory closures or particular policies.', '',
+              f'[Annual regional series]({table_prefix}bres_growth_path.csv) · '
+              f'[All annual industry contributions]({table_prefix}bres_annual_sector_contributions.csv)', '']
+    return lines
+
+
 def findings(tables, aps, manifest, local=False):
     image_prefix = "figures/" if local else "../output/figures/"
     table_prefix = "tables/" if local else "../output/tables/"
@@ -176,6 +304,7 @@ def findings(tables, aps, manifest, local=False):
              f"and {manufacturing['West Midlands']:.1f}% in the West Midlands in 2019. "
              "This difference gives industry composition a concrete role to examine. Neither region is a control group, "
              "and the comparison does not represent all regional disparities.", "",
+             *regional_context(tables),
              "## Results", "",
              f"Between 2019 and 2024, covered BRES employee jobs grew by {main['North West']['actual_growth_pct']:.2f}% "
              f"in the North West and {main['West Midlands']['actual_growth_pct']:.2f}% in the West Midlands: "
@@ -221,9 +350,7 @@ def findings(tables, aps, manifest, local=False):
     for name, row in main.items():
         lines.append(f"| {name} | {signed(row['actual_growth_pct'])} | {signed(row['national_growth_pp'])} | {signed(row['industry_mix_pp'])} | {signed(row['within_industry_pp'])} |")
     lines += ["", f"![Industry contributions]({image_prefix}sector_contributions.png)", "",
-              "The three largest section contributions by absolute magnitude are:", ""]
-    for row in sorted(tables["sector_gap_contributions"], key=lambda r: abs(r["growth_gap_contribution_pp"]), reverse=True)[:3]:
-        lines.append(f"- {row['sector_label']}: {signed(row['growth_gap_contribution_pp'])} percentage points.")
+              *industry_discussion(tables, table_prefix), *annual_discussion(tables, image_prefix, table_prefix)]
     reassigned = fine['industry_mix_gap_pp'] - gap['industry_mix_gap_pp']
     inactive = fine['inactive_industries'].split(';') if fine['inactive_industries'] else []
     coverage = f"The division-level calculation uses {fine['industry_count']} active divisions in sections A–S. "

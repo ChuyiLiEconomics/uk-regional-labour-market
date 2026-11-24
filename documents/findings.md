@@ -4,6 +4,25 @@
 
 How much of the North West–West Midlands employee job growth gap is associated with their initial industry structure? The two regions provide a case study of employment differences within the same national statistical framework. Manufacturing accounted for 9.2% of covered employee jobs in the North West and 11.6% in the West Midlands in 2019. This difference gives industry composition a concrete role to examine. Neither region is a control group, and the comparison does not represent all regional disparities.
 
+### Regional background
+
+[ONS analysis of 2015 employee jobs](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/thespatialdistributionofindustriesingreatbritain/2015), published in 2017, identified the West Midlands as a centre of motor-vehicle manufacturing and chemical-manufacturing concentrations in parts of the North West. These are historical features, rather than explanations of the subsequent employment changes.
+
+The project’s own 2019 BRES baseline shows how the regions differ within manufacturing:
+
+| Division | NW jobs | NW share of manufacturing (%) | WM jobs | WM share of manufacturing (%) |
+|---|---:|---:|---:|---:|
+| 10: Food products | 51,000 | 16.2 | 28,000 | 9.3 |
+| 20: Chemicals | 19,000 | 6.1 | 5,000 | 1.7 |
+| 25: Fabricated metals | 33,000 | 10.5 | 49,000 | 16.3 |
+| 29: Motor vehicles | 19,000 | 6.1 | 53,000 | 17.6 |
+
+These four divisions illustrate the regional profiles; they were not selected as the largest contributors to the growth gap. Shares use manufacturing employment as their denominator, rather than all regional jobs. The different mixes motivate checking the section-level decomposition against two-digit industries.
+
+[ONS Census analysis published in 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/howindustrieshavechangedatalocallevelbetweencensuses/2022-12-08) also documented growth in transport and warehousing employment among Midlands residents over 2011–2021. This provides background for examining transport as a counterweight to manufacturing in the present comparison. Census resident employment and BRES workplace jobs have different populations and periods; their changes are not combined.
+
+The case therefore compares regions with substantial manufacturing employment but different industrial profiles. It allows industry composition and within-industry changes to be examined under common national definitions. It does not establish why a particular factory, firm or worker changed employment. All results refer to the full North West and West Midlands statistical regions, rather than individual cities or combined-authority areas.
+
 ## Results
 
 Between 2019 and 2024, covered BRES employee jobs grew by 5.29% in the North West and 3.09% in the West Midlands: a gap of +2.20 percentage points. At the section level, the industry-mix contribution is +0.60 points and the within-section remainder +1.59 points.
@@ -51,11 +70,51 @@ PAYE counts people receiving pay through payroll, including paid leave and furlo
 
 ![Industry contributions](../output/figures/sector_contributions.png)
 
-The three largest section contributions by absolute magnitude are:
+The three sections with the largest absolute contributions to the growth gap are:
 
-- Manufacturing: +1.55 percentage points.
-- Transport and storage: -1.33 percentage points.
-- Wholesale and retail: -1.12 percentage points.
+| Section | NW jobs, 2019 → 2024 | NW change (%) | WM jobs, 2019 → 2024 | WM change (%) | Gap contribution (pp) |
+|---|---:|---:|---:|---:|---:|
+| Manufacturing | 314,000 → 310,500 | -1.11 | 301,350 → 258,600 | -14.19 | +1.55 |
+| Transport and storage | 191,500 → 169,000 | -11.75 | 154,050 → 171,500 | +11.33 | -1.33 |
+| Wholesale and retail | 552,000 → 502,000 | -9.06 | 414,000 → 405,000 | -2.17 | -1.12 |
+
+Manufacturing employment fell in both regions. Its contribution to the regional growth gap therefore compares job losses, scaled by each region’s total 2019 employment. A positive gap contribution does not mean manufacturing created jobs in the North West.
+
+The job changes and sector growth rates answer different questions from the contribution column: the latter uses all covered regional baseline jobs as its denominator. The transport and retail comparisons show why a manufacturing-only account would miss changes elsewhere in the regional economy.
+
+[All manufacturing divisions, including endpoint changes](../output/tables/manufacturing_divisions.csv)
+
+### When did the gap emerge?
+
+![Annual workplace job growth and contributions](../output/figures/bres_timing.png)
+
+| Year | NW growth from 2019 (%) | WM growth from 2019 (%) | Cumulative gap (pp) | Annual contribution to gap (pp) |
+|---|---:|---:|---:|---:|
+| 2019 | +0.00 | +0.00 | +0.00 | Baseline |
+| 2020 | -2.70 | -1.05 | -1.64 | -1.64 |
+| 2021 | +0.96 | +0.49 | +0.47 | +2.12 |
+| 2022 | +2.34 | +2.80 | -0.47 | -0.94 |
+| 2023 | +4.79 | +3.57 | +1.22 | +1.68 |
+| 2024 | +5.29 | +3.09 | +2.20 | +0.98 |
+
+The annual contributions include both widening and narrowing of the gap. From 2022 to 2024, the cumulative gap moved from -0.47 to +2.20 percentage points, a change of +2.66 points. The endpoint comparison therefore needs to be read alongside the annual path.
+
+Each annual contribution is the difference between the two regions’ job changes divided by their respective fixed 2019 employment totals. Contributions add to the endpoint gap. They are not differences between conventional year-on-year percentage growth rates.
+
+| Interval | Largest absolute industry contributions to the annual gap (pp) |
+|---|---|
+| 2019–2020 | Manufacturing +1.13; Accommodation and food +0.92 |
+| 2020–2021 | Wholesale and retail -1.68; Construction +1.34 |
+| 2021–2022 | Transport and storage -1.46; Real estate -1.34 |
+| 2022–2023 | Health and social work +1.45; Manufacturing +1.23 |
+| 2023–2024 | Health and social work -0.99; Construction +0.43 |
+
+Before the main window, 2018–2019 job growth was +2.29% in the North West and +0.53% in the West Midlands. An earlier baseline includes that difference and uses different denominators. Ending in 2023 instead of 2024 also omits the final year’s contribution. The sensitivity results consequently describe both a stable endpoint sign and a materially changing magnitude.
+
+Annual BRES movements can reflect survey variation, business reporting and classification changes as well as economic changes. These estimates locate changes in the published series; they cannot attribute them to the pandemic, Brexit, factory closures or particular policies.
+
+[Annual regional series](../output/tables/bres_growth_path.csv) · [All annual industry contributions](../output/tables/bres_annual_sector_contributions.csv)
+
 
 ### What changes with finer industry detail?
 
