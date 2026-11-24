@@ -4,6 +4,8 @@
 
 The main comparison is between England's North West and West Midlands. The question is how their labour markets have changed since 2019 and how much of their workplace employee job growth gap is associated with their initial industry mix.
 
+In the baseline BRES data, manufacturing accounts for 9.2% of covered employee jobs in the North West and 11.6% in the West Midlands. These differing initial structures give industry composition a role to examine. The regions share a national statistical framework, but they are not a matched pair or a representative sample of English regions.
+
 The common historical comparison is 2019–2024. Later PAYE and ASHE estimates provide an update under their own definitions. No treatment, policy effect or pandemic effect is identified. Neither region is designated a control group.
 
 The principal outputs are the resident payroll count index, workplace employee job growth decomposition, and median hourly pay comparisons. Latest APS employment and inactivity rates provide the original resident-rate context. Historical windows are not searched to choose significant results.
@@ -47,8 +49,21 @@ The main benchmark is the sum of all nine English regions. Sensitivity cases use
 | Earlier endpoint | 2019 | 2023 | England | 19 SIC sections |
 | Exclude focal regions | 2019 | 2024 | Other seven English regions | 19 SIC sections |
 | Coarser classification | 2019 | 2024 | England | A–F, G–I, J–N, O–S |
+| Finer classification | 2019 | 2024 | England | 84 active two-digit divisions in A–S |
 
 The remainder includes all differences within the chosen groups: worker and firm composition, finer industry mix, local conditions, measurement error and other influences. It is not an estimate of competitiveness or a policy effect. Changing the industry grouping changes the allocation between mix and remainder.
+
+### Nested comparison: sections and divisions
+
+The covered A–S input contains 85 two-digit divisions. Division 07 (mining of metal ores) has zero published employment in all nine English regions in both 2019 and 2024. It is excluded from growth-rate calculations, leaving 84 active divisions and exactly the same covered employment totals. An industry is omitted only if all regions have zero jobs at both endpoints; a zero benchmark baseline with positive employment at either endpoint remains an error. Published zero counts are subject to the source's rounding.
+
+The division-level decomposition uses the same dates, benchmark and regional denominators as the 19-section comparison. For a section s, sum the division-level mix terms for divisions in s and subtract the section-level mix term:
+
+F(r,s) = sum[M_division(r,i), i in s] − M_section(r,s).
+
+Then R_section(r,s) = F(r,s) + sum[R_division(r,i), i in s]. The same identity holds after subtracting West Midlands contributions from North West contributions. `within_section_composition.csv` exports all 19 sections, with the original remainder, finer-composition term and remaining within-division term. All terms are in percentage points of total covered regional employment growth, rather than section-specific growth.
+
+Finer composition can increase or decrease the mix contribution; it need not reduce the remainder. This is a comparison of accounting classifications, not a test of a mechanism. The remaining division-level term can still include finer industry structure and composition effects within divisions.
 
 The denominator is the sum of published division counts in A–S. The separately published BRES total is retained for reconciliation, not used to rescale the component counts. Rounding can make the division sum differ from that total. The exact accounting identity does not eliminate sampling error, rounding or revisions. No confidence interval or significance label is attached to the decomposition.
 

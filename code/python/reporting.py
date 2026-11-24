@@ -46,13 +46,13 @@ def charts(destination, tables):
     ax.grid(axis="y", color="#E5E7EB")
     ax.legend(frameon=False, ncol=3, loc="upper left")
     footer(fig, "Source: HMRC / ONS PAYE RTI, November 2026 vintage. Residence-based, seasonally adjusted.\n"
-                "Solid lines end in September 2026. Open markers: October early estimates. England sums nine regions.")
+                f"Solid lines end in {month_label(main[-1]['period'])}. Open markers: early estimates. England sums nine regions.")
     save(fig, "paye_recovery")
 
     fig, axes = plt.subplots(1, 2, figsize=(11, 5.8))
     fig.subplots_adjust(left=0.09, right=0.98, top=0.83, bottom=0.24, wspace=0.30)
     x = np.arange(3)
-    latest = [next(r for r in tables["hourly_pay_comparison"] if r["year"] == 2026 and r["work_pattern"] == p)
+    latest = [next(r for r in tables["hourly_pay_comparison"] if r["year"] == max(v["year"] for v in tables["hourly_pay_comparison"]) and r["work_pattern"] == p)
               for p in PATTERNS]
     for index, (name, prefix) in enumerate([("North West", "north_west"), ("West Midlands", "west_midlands")]):
         offset = (index - 0.5) * 0.35
@@ -63,12 +63,12 @@ def charts(destination, tables):
         ax.grid(axis="y", color="#E5E7EB")
         ax.set_axisbelow(True)
         ax.yaxis.set_major_locator(MaxNLocator(5))
-    axes[0].set_title("Median hourly pay, April 2026", loc="left", fontsize=12, fontweight="bold", pad=15)
+    axes[0].set_title(f"Median hourly pay, April {latest[0]['year']}", loc="left", fontsize=12, fontweight="bold", pad=15)
     axes[0].set_ylabel("GBP per hour, excluding overtime")
     axes[0].legend(frameon=False, fontsize=9)
     axes[1].set_title("Real change from April 2019", loc="left", fontsize=12, fontweight="bold", pad=15)
     axes[1].set_ylabel("Change (%)")
-    footer(fig, "Source: ONS ASHE Table 5.6a, 2019 revised and 2026 provisional. Workplace-based employee jobs.\n"
+    footer(fig, f"Source: ONS ASHE Table 5.6a, 2019 revised and {latest[0]['year']} {latest[0]['vintage']}. Workplace-based jobs.\n"
                 "Real change uses the UK CPIH index for the matching April. It does not adjust for regional price levels.")
     save(fig, "hourly_pay")
 
@@ -88,7 +88,7 @@ def charts(destination, tables):
                         textcoords="offset points", ha="center", fontsize=9)
     ax.axhline(0, color="#777777", linewidth=1)
     ax.set_xticks(x, labels)
-    ax.set_ylim(-2.1, 6.5)
+    ax.margins(y=0.22)
     ax.set_ylabel("Contribution to growth (percentage points)")
     ax.set_title("Employee job growth, 2019–2024", loc="left", fontsize=17, fontweight="bold", pad=18)
     ax.legend(frameon=False, ncol=2, loc="upper right")
@@ -114,126 +114,181 @@ def charts(destination, tables):
     save(fig, "sector_contributions")
 
 
+def signed(value):
+    return f"{0.0 if abs(value) < 0.005 else value:+.2f}"
+
+
+def month_label(period):
+    return datetime.strptime(period, "%Y-%m").strftime("%B %Y")
+
+
+def aps_conclusion(rows):
+    available = [r for r in rows if r["reject_5pct_after_holm"] is not None]
+    rejected = [r["indicator"] for r in available if r["reject_5pct_after_holm"]]
+    if not available:
+        return "The available confidence margins do not support either approximate test."
+    if rejected:
+        text = "Equality is rejected at 5% after Holm adjustment for: " + ", ".join(rejected) + "."
+    else:
+        text = "None of the available comparisons rejects equal regional rates at 5% after Holm adjustment."
+    if len(available) < len(rows):
+        text += " At least one comparison is unavailable."
+    return text
+
+
+def case_label(row):
+    grouping = {"sections": "19 sections", "broad": "4 broad groups", "divisions": f"{row['industry_count']} active divisions"}[row["grouping"]]
+    benchmark = "England" if row["benchmark"] == "England" else "Other seven English regions"
+    return f"{row['start_year']}–{row['end_year']}; {benchmark}; {grouping}"
+
+
+def sensitivity_conclusion(rows):
+    values = [r["growth_gap_pp"] for r in rows]
+    direction = ("positive in every case" if all(v > 0 for v in values) else
+                 "negative in every case" if all(v < 0 for v in values) else "not of the same strict sign in every case")
+    return (f"The North West minus West Midlands growth gap is {direction}, ranging from "
+            f"{min(values):+.2f} to {max(values):+.2f} percentage points. "
+            "Classification changes the split between composition and the remainder without changing covered job growth.")
+
+
 def findings(tables, aps, manifest, local=False):
     image_prefix = "figures/" if local else "../output/figures/"
     table_prefix = "tables/" if local else "../output/tables/"
-    main = {r["region"]: r for r in tables["shift_share_summary"] if r["case"] == "2019-2024_england_sections"}
-    gap = next(r for r in tables["shift_share_gap"] if r["case"] == "2019-2024_england_sections")
+    main_case = "2019-2024_england_sections"
+    fine_case = "2019-2024_england_divisions"
+    main = {r["region"]: r for r in tables["shift_share_summary"] if r["case"] == main_case}
+    gap = next(r for r in tables["shift_share_gap"] if r["case"] == main_case)
+    fine = next(r for r in tables["shift_share_gap"] if r["case"] == fine_case)
     paye = {r["region"]: r for r in tables["paye_summary"] if r["baseline_year"] == 2019 and r["estimate_status"] == "latest_non_early"}
-    latest_pay = [r for r in tables["hourly_pay_comparison"] if r["year"] == 2026]
+    early = {r["region"]: r for r in tables["paye_summary"] if r["baseline_year"] == 2019 and r["estimate_status"] == "early_estimate"}
+    pay_year = max(r["year"] for r in tables["hourly_pay_comparison"])
+    latest_pay = [r for r in tables["hourly_pay_comparison"] if r["year"] == pay_year]
+    all_pay = next(r for r in latest_pay if r["work_pattern"] == "all")
+    revised = max((r for r in tables["hourly_pay_comparison"] if r["vintage"] == "revised" and r["work_pattern"] == "all"), key=lambda r: r["year"])
+    payroll_gap_2024 = paye['North West']['growth_to_2024_average_pct'] - paye['West Midlands']['growth_to_2024_average_pct']
+    manufacturing = {r["region"]: r["baseline_share_pct"] for r in tables["shift_share_industries"]
+                     if r["case"] == main_case and r["industry"] == "C"}
     lines = ["# Employment, pay and industrial change in two English regions", "",
-             "The comparison asks how the North West and West Midlands have changed since 2019, and how much of their "
-             "employee job growth gap is associated with their initial industry mix. The sources measure different "
-             "populations and locations, so each comparison is interpreted within its own scope.", "",
-             "## What the sources show", "",
-             f"PAYE employment growth was close: by September 2026, payrolled employee numbers were "
-             f"{paye['North West']['growth_from_baseline_pct']:.2f}% above their 2019 average in the North West and "
-             f"{paye['West Midlands']['growth_from_baseline_pct']:.2f}% above in the West Midlands. In contrast, "
-             f"workplace-based BRES employee jobs in the covered industries grew by {main['North West']['actual_growth_pct']:.2f}% "
-             f"and {main['West Midlands']['actual_growth_pct']:.2f}% respectively between 2019 and 2024.", "",
-             f"The BRES growth gap was {gap['growth_gap_pp']:.2f} percentage points. The shift-share decomposition assigns "
-             f"{gap['industry_mix_gap_pp']:.2f} points to differences in initial industry mix and "
-             f"{gap['within_industry_gap_pp']:.2f} points to differences in growth within the industry sections. "
-             "The second component includes all remaining regional differences and estimation error; it is not a causal effect.", "",
+             "## Question and comparison", "",
+             "How much of the North West–West Midlands employee job growth gap is associated with their initial industry structure? "
+             "The two regions provide a case study of employment differences within the same national statistical framework. "
+             f"Manufacturing accounted for {manufacturing['North West']:.1f}% of covered employee jobs in the North West "
+             f"and {manufacturing['West Midlands']:.1f}% in the West Midlands in 2019. "
+             "This difference gives industry composition a concrete role to examine. Neither region is a control group, "
+             "and the comparison does not represent all regional disparities.", "",
+             "## Results", "",
+             f"Between 2019 and 2024, covered BRES employee jobs grew by {main['North West']['actual_growth_pct']:.2f}% "
+             f"in the North West and {main['West Midlands']['actual_growth_pct']:.2f}% in the West Midlands: "
+             f"a gap of {gap['growth_gap_pp']:+.2f} percentage points. "
+             f"At the section level, the industry-mix contribution is {gap['industry_mix_gap_pp']:+.2f} points "
+             f"and the within-section remainder {gap['within_industry_gap_pp']:+.2f} points.", "",
+             f"Using {fine['industry_count']} active two-digit divisions changes those contributions to "
+             f"{fine['industry_mix_gap_pp']:+.2f} and {fine['within_industry_gap_pp']:+.2f} points. "
+             "The overall growth gap is unchanged; the interpretation of its components depends on industry detail.", "",
              "## 1. Resident employment and sampling uncertainty", "",
-             "The APS measures employment and inactivity rates among residents aged 16–64. For July 2025–June 2026:", "",
-             "| Indicator | North West (%) | West Midlands (%) | Gap (pp) | Approx. 95% interval for gap | Raw p | Holm p |",
-             "|---|---:|---:|---:|---:|---:|---:|"]
+             "The APS measures employment and inactivity rates among residents aged 16–64. "
+             "Each row uses its latest common valid annual window.", "",
+             "| Indicator | Window | North West (%) | West Midlands (%) | Gap (pp) | Approx. 95% interval | Raw p | Holm p |",
+             "|---|---|---:|---:|---:|---:|---:|---:|"]
     for row in tables["aps_gap_tests"]:
         interval = f"[{row['approx_ci_lower_pp']:.2f}, {row['approx_ci_upper_pp']:.2f}]" if row["approx_ci_lower_pp"] is not None else "Unavailable"
         raw_p = f"{row['approx_p_two_sided']:.3f}" if row["approx_p_two_sided"] is not None else "Unavailable"
         adj_p = f"{row['holm_adjusted_p']:.3f}" if row["holm_adjusted_p"] is not None else "Unavailable"
-        lines.append(f"| {row['indicator'].capitalize()} | {row['region_a_pct']:.1f} | {row['region_b_pct']:.1f} | {row['gap_pp']:+.1f} | {interval} | {raw_p} | {adj_p} |")
-    lines += ["", "Neither comparison rejects equal regional rates at 5% under a normal approximation that sets the "
-              "cross-region covariance to zero. This is not an equivalence test or a full survey-design test. The standard "
-              "errors are reconstructed from rounded Nomis confidence margins. Holm adjustment covers the two latest-period "
-              "indicators only. No search across historical windows is used to select significant results.", "",
-              "Relative to calendar 2019, employment estimates changed by −0.2 percentage points in the North West and "
-              "−0.4 in the West Midlands. Those time changes remain descriptive because their covariance is not provided.", "",
-              "## 2. Monthly payrolled employment", "",
-              f"![Payrolled employment]({image_prefix}paye_recovery.png)", "",
-              "| Region | Sep 2026 employees | Change from 2019 average (%) | Annual change (%) | 2019–2024 annual-average growth (%) |",
+        lines.append(f"| {row['indicator'].capitalize()} | {row['period_label']} | {row['region_a_pct']:.1f} | {row['region_b_pct']:.1f} | {row['gap_pp']:+.1f} | {interval} | {raw_p} | {adj_p} |")
+    lines += ["", aps_conclusion(tables["aps_gap_tests"]), "",
+              "The approximation reconstructs standard errors from rounded Nomis margins and assumes zero cross-region "
+              "covariance. It is not a full survey-design test. Intervals are pointwise; Holm adjustment covers the two "
+              "latest-period tests. Failure to reject equality does not establish equivalence.", ""]
+    for row in aps["baseline_changes"]:
+        lines += [f"From {row['baseline_period_label']} to {row['latest_period_label']}, {row['indicator']} changed by "
+                  f"{row['change_region_a_pp']:+.1f} percentage points in the North West and {row['change_region_b_pp']:+.1f} "
+                  "in the West Midlands. These time changes are descriptive; their covariance is unavailable.", ""]
+    lines += ["## 2. Monthly payrolled employment", "", f"![Payrolled employment]({image_prefix}paye_recovery.png)", "",
+              f"| Region | {month_label(paye['North West']['period'])} employees | Change from 2019 average (%) | Annual change (%) | 2019–2024 annual-average growth (%) |",
               "|---|---:|---:|---:|---:|"]
     for name, row in paye.items():
-        lines.append(f"| {name} | {row['payrolled_employees']:,.0f} | {row['growth_from_baseline_pct']:+.2f} | {row['year_on_year_pct']:+.2f} | {row['growth_to_2024_average_pct']:+.2f} |")
-    early = {r["region"]: r for r in tables["paye_summary"] if r["baseline_year"] == 2019 and r["estimate_status"] == "early_estimate"}
-    lines += ["", f"October 2026 is an early estimate. Including it changes cumulative growth to "
-              f"{early['North West']['growth_from_baseline_pct']:.2f}% and {early['West Midlands']['growth_from_baseline_pct']:.2f}%. "
-              "It does not change the conclusion that the two indexed PAYE paths are close. All PAYE months can still be revised.", "",
-              "PAYE counts people receiving pay through payroll, including paid leave and furlough. It excludes self-employment, "
-              "covers all ages and assigns people by residence. An index measures changes in counts; it is not an employment "
-              "rate and does not control for population growth. Monthly observations are not treated as independent samples.", "",
+        lines.append(f"| {name} | {row['payrolled_employees']:,.0f} | {signed(row['growth_from_baseline_pct'])} | {signed(row['year_on_year_pct'])} | {row['growth_to_2024_average_pct']:+.2f} |")
+    lines += ["", f"The {month_label(early['North West']['period'])} early estimates put cumulative growth at "
+              f"{early['North West']['growth_from_baseline_pct']:+.2f}% and {early['West Midlands']['growth_from_baseline_pct']:+.2f}%. "
+              "All PAYE months can be revised.", "",
+              "PAYE counts people receiving pay through payroll, including paid leave and furlough, by residence. "
+              "It excludes self-employment and covers all ages. An index measures changes in counts, without controlling "
+              "for population growth. Monthly observations are not treated as independent samples.", "",
               "## 3. Industry structure and employee job growth", "",
               f"![Shift-share decomposition]({image_prefix}shift_share.png)", "",
-              "| Region | Actual growth (%) | England growth (pp) | Industry mix (pp) | Within-industry remainder (pp) |",
-              "|---|---:|---:|---:|---:|"]
+              "| Region | Actual growth (%) | England growth (pp) | Industry mix (pp) | Within-section remainder (pp) |",
+              "|---|---:|---:|---:|---:|---:|"]
     for name, row in main.items():
-        lines.append(f"| {name} | {row['actual_growth_pct']:+.2f} | {row['national_growth_pp']:+.2f} | {row['industry_mix_pp']:+.2f} | {row['within_industry_pp']:+.2f} |")
-    lines += ["", "Both regions began with an industry mix that would have grown more slowly than the English aggregate "
-              "if every local industry had followed its England-wide growth rate. This compositional drag was larger in the "
-              "West Midlands. The larger part of the main growth gap remains within the broad industry sections.", "",
-              f"![Industry contributions]({image_prefix}sector_contributions.png)", "",
-              "Manufacturing contributed +1.55 percentage points to the North West minus West Midlands growth gap. "
-              "Transport and storage contributed −1.33 points, while wholesale and retail contributed −1.12 points. "
-              "These opposing contributions show why a single regional average conceals substantial industry differences.", "",
-              "### Sensitivity to the comparison", "",
-              "| Specification | Growth gap (pp) | Industry-mix contribution (pp) | Within-industry remainder (pp) |",
+        lines.append(f"| {name} | {signed(row['actual_growth_pct'])} | {signed(row['national_growth_pp'])} | {signed(row['industry_mix_pp'])} | {signed(row['within_industry_pp'])} |")
+    lines += ["", f"![Industry contributions]({image_prefix}sector_contributions.png)", "",
+              "The three largest section contributions by absolute magnitude are:", ""]
+    for row in sorted(tables["sector_gap_contributions"], key=lambda r: abs(r["growth_gap_contribution_pp"]), reverse=True)[:3]:
+        lines.append(f"- {row['sector_label']}: {signed(row['growth_gap_contribution_pp'])} percentage points.")
+    reassigned = fine['industry_mix_gap_pp'] - gap['industry_mix_gap_pp']
+    inactive = fine['inactive_industries'].split(';') if fine['inactive_industries'] else []
+    coverage = f"The division-level calculation uses {fine['industry_count']} active divisions in sections A–S. "
+    if inactive:
+        coverage += (f"The following divisions have zero published jobs in every English region at both endpoints: {', '.join(inactive)}. They "
+                     "are omitted from growth-rate calculations. ")
+    coverage += "The covered employment totals are unchanged."
+    lines += ["", "### What changes with finer industry detail?", "", coverage, "",
+              f"Moving from 19 sections to {fine['industry_count']} active divisions changes the industry-mix contribution "
+              f"to the regional gap by {reassigned:+.2f} percentage points, from {gap['industry_mix_gap_pp']:+.2f} "
+              f"to {fine['industry_mix_gap_pp']:+.2f}. The remainder changes by {-reassigned:+.2f} points, "
+              f"from {gap['within_industry_gap_pp']:+.2f} to {fine['within_industry_gap_pp']:+.2f}. "
+              "This isolates the accounting contribution of finer industry composition within sections; it does not identify a causal mechanism.", "",
+              "| Section | Original within-section gap (pp) | Finer composition (pp) | Remaining within-division gap (pp) |",
+              "|---|---:|---:|---:|"]
+    for row in sorted(tables["within_section_composition"], key=lambda r: abs(r["finer_composition_gap_pp"]), reverse=True)[:5]:
+        lines.append(f"| {row['sector_label']} | {signed(row['section_within_gap_pp'])} | {signed(row['finer_composition_gap_pp'])} | {signed(row['division_within_gap_pp'])} |")
+    lines += ["", "The five sections above have the largest absolute finer-composition contributions. In each row, the "
+              "last two columns sum to the original remainder. Contributions use each region's total covered baseline employment, "
+              "so each column in the full section table sums to its corresponding aggregate component.", "",
+              f"[All sections and the nested decomposition]({table_prefix}within_section_composition.csv)", "",
+              "### Sensitivity", "",
+              "| Specification | Growth gap (pp) | Industry mix (pp) | Within-industry remainder (pp) |",
               "|---|---:|---:|---:|"]
     for row in tables["shift_share_gap"]:
-        lines.append(f"| {row['case'].replace('_', ' ')} | {row['growth_gap_pp']:+.2f} | {row['industry_mix_gap_pp']:+.2f} | {row['within_industry_gap_pp']:+.2f} |")
-    lines += ["", "The North West growth advantage remains positive in every specification shown. Its magnitude changes "
-              "with the start and end years. Grouping 19 sections into four broader categories moves part of the industry-mix "
-              "component into the remainder, so the allocation depends on the classification. Removing both focal regions "
-              "from the benchmark leaves the main qualitative pattern intact.", "",
-              "BRES counts jobs at their workplace. The decomposition uses sums of SIC 2007 sections A–S, built from the "
-              "published two-digit divisions. Rounded divisions need not sum exactly to the separately rounded official total. "
-              "The reconciliation table preserves that difference; no count is adjusted to force agreement. No standard error "
-              "for this decomposition is supplied, so the growth gap is not labelled statistically significant.", "",
-              "## 4. Hourly pay", "",
-              f"![Hourly pay]({image_prefix}hourly_pay.png)", "",
-              "| Work pattern | NW April 2026 (GBP/hour) | WM April 2026 (GBP/hour) | Gap (GBP/hour) | NW real change from 2019 (%) | WM real change from 2019 (%) |",
+        lines.append(f"| {case_label(row)} | {signed(row['growth_gap_pp'])} | {signed(row['industry_mix_gap_pp'])} | {signed(row['within_industry_gap_pp'])} |")
+    lines += ["", sensitivity_conclusion(tables["shift_share_gap"]), "",
+              "BRES counts workplace jobs. Rounded division counts need not sum exactly to the separately rounded official "
+              "total; that difference is retained in the reconciliation table. The decomposition has no estimated standard "
+              "errors. Its remainder includes worker and firm composition, local conditions and measurement error, among other influences.", "",
+              "## 4. Hourly pay", "", f"![Hourly pay]({image_prefix}hourly_pay.png)", "",
+              f"| Work pattern | NW April {pay_year} (GBP/hour) | WM April {pay_year} (GBP/hour) | Gap (GBP/hour) | NW real change from 2019 (%) | WM real change from 2019 (%) |",
               "|---|---:|---:|---:|---:|---:|"]
     for row in latest_pay:
-        lines.append(f"| {PATTERNS[row['work_pattern']]} | {row['north_west_gbp_hour']:.2f} | {row['west_midlands_gbp_hour']:.2f} | {row['gap_gbp_hour']:+.2f} | {row['north_west_real_growth_since_2019_pct']:+.2f} | {row['west_midlands_real_growth_since_2019_pct']:+.2f} |")
-    revised = next(r for r in tables["hourly_pay_comparison"] if r["year"] == 2025 and r["work_pattern"] == "all")
-    lines += ["", "The latest figures are provisional. In the revised 2025 estimates, all-employee median hourly pay was "
-              f"GBP {revised['north_west_gbp_hour']:.2f} in the North West and GBP {revised['west_midlands_gbp_hour']:.2f} "
-              f"in the West Midlands, a gap of GBP {revised['gap_gbp_hour']:.2f}. The latest aggregate pay gap is therefore "
-              "smaller than in the revised 2025 comparison. These levels and changes are not significance-test results.", "",
-              "Pay is hourly earnings excluding overtime, measured for workplace-based employee jobs on adult rates under "
-              "the ASHE eligibility rules. Full-time and part-time estimates are kept separate. Real changes deflate each "
-              "April estimate using the matching UK CPIH index, expressed in April 2019 prices. A common UK deflator does "
-              "not measure differences in regional living costs. Changes in medians can reflect workforce composition, "
-              "rather than pay changes for the same workers.", "",
+        lines.append(f"| {PATTERNS[row['work_pattern']]} | {row['north_west_gbp_hour']:.2f} | {row['west_midlands_gbp_hour']:.2f} | {signed(row['gap_gbp_hour'])} | {row['north_west_real_growth_since_2019_pct']:+.2f} | {row['west_midlands_real_growth_since_2019_pct']:+.2f} |")
+    lines += ["", f"The {pay_year} figures are {all_pay['vintage']}. In revised {revised['year']} estimates, all-employee "
+              f"median hourly pay was GBP {revised['north_west_gbp_hour']:.2f} and GBP {revised['west_midlands_gbp_hour']:.2f}, "
+              f"a gap of GBP {revised['gap_gbp_hour']:+.2f}. These are descriptive comparisons.", "",
+              "ASHE measures hourly earnings excluding overtime for eligible workplace employee jobs. Real changes use matching "
+              "April UK CPIH, expressed in April 2019 prices. This does not adjust for regional living costs or follow the same "
+              "workers over time.", "",
               "### Pay within industries", "",
-              "The following table uses revised 2025 full-time estimates. Both regional median CVs must be at most 5% to "
-              "be included. The full export retains all 19 sections, including suppressed or less precise estimates. "
-              "The filter is a precision screen, not a significance test.", "",
-              "| Industry | NW (GBP/hour) | WM (GBP/hour) | Gap (GBP/hour) |",
-              "|---|---:|---:|---:|"]
+              "Revised 2025 full-time medians are shown when both regional median CVs are at most 5%. The full export retains "
+              "all 19 sections. This is a precision screen, not a significance test.", "",
+              "| Industry | NW (GBP/hour) | WM (GBP/hour) | Gap (GBP/hour) |", "|---|---:|---:|---:|"]
     for row in tables["industry_pay_comparison"]:
         if row["passes_cv_5pct_in_both"]:
-            lines.append(f"| {row['sector_label']} | {row['north_west_gbp_hour']:.2f} | {row['west_midlands_gbp_hour']:.2f} | {row['gap_gbp_hour']:+.2f} |")
-    lines += ["", "Industry medians are not averaged to construct a regional median. The table does not hold worker "
-              "characteristics constant and does not estimate a like-for-like regional wage premium.", "",
-              "## Reading the evidence together", "",
-              "The sources support a narrower conclusion than a single ranking of the two labour markets. Resident payroll "
-              "counts grew at similar rates, while workplace job growth differed more and varied across industries. Latest "
-              "aggregate hourly pay estimates were close. These differences in coverage and timing matter; the data cannot "
-              "establish which mechanism, such as commuting, population change or worker composition, produces the patterns.", "",
-              "A causal explanation would require an identified shock or policy and a defensible comparison design. The "
-              "shift-share remainder should not be interpreted as the effect of a regional policy, competitiveness or the pandemic.", "",
+            lines.append(f"| {row['sector_label']} | {row['north_west_gbp_hour']:.2f} | {row['west_midlands_gbp_hour']:.2f} | {signed(row['gap_gbp_hour'])} |")
+    lines += ["", "Industry medians are not averaged into a regional median. These comparisons do not hold worker "
+              "characteristics constant or estimate a regional wage premium.", "",
+              "## Reading the sources together", "",
+              f"Over the common 2019–2024 comparison, the PAYE annual-average growth gap is {payroll_gap_2024:+.2f} points, "
+              f"compared with {gap['growth_gap_pp']:+.2f} points for BRES workplace jobs. "
+              "Thus the workplace and residence measures need separate interpretation even with aligned years. "
+              "Commuting and multiple jobs are possible areas for further investigation, but these aggregates cannot determine "
+              "their contributions. The reference-date and coverage differences also remain.", "",
+              f"At the latest ASHE endpoint, the all-employee hourly median gap is GBP {all_pay['gap_gbp_hour']:+.2f}. "
+              "The pay and job-growth comparisons describe different aspects of the labour market; they do not provide a single regional ranking.", "",
               "## Sources and reproduction", "",
-              "- APS: July 2025–June 2026 latest window; snapshot retrieved 24 November 2026.",
-              "- PAYE RTI: November 2026 release, with October early estimates separated from September.",
-              "- BRES: available API years 2018–2024, source last updated 28 October 2025. The 2024 observations are provisional.",
-              "- ASHE Table 5.6a/b: revised 2019, 2024 and 2025; provisional 2026.",
-              "- CPIH: ONS L522, November 2026 release, matching April observations.", ""]
+              "The study uses the frozen 24 November 2026 downloads: APS annual windows through June 2026; November 2026 "
+              "PAYE RTI and CPIH releases; BRES 2018–2024 (2024 provisional); and revised 2019/2024/2025 plus provisional "
+              "2026 ASHE Table 5.6a/b. Source hashes, vintages and original rows or cells are recorded in data/extended.", ""]
     for name, url in manifest["source_pages"].items():
         lines.append(f"- [{name.upper()} source]({url})")
-    lines += ["", "Frozen prepared inputs and original-download hashes are in data/extended. The preparation script "
-              "records original workbook names, sheet names and cells or rows. Run python code/python/research.py to "
-              "regenerate this report, its tables and figures without downloading new data.", "",
+    lines += ["", "Run `python code/python/research.py` to regenerate this report, its tables and figures offline.", "",
               f"[APS tests]({table_prefix}aps_gap_tests.csv) · [Growth decomposition]({table_prefix}shift_share_summary.csv) · "
               f"[Industry contributions]({table_prefix}sector_gap_contributions.csv) · [Pay comparisons]({table_prefix}hourly_pay_comparison.csv)", ""]
     return "\n".join(lines)

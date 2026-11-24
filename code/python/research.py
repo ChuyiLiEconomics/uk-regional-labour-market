@@ -162,13 +162,16 @@ def aggregate_bres(rows: list[dict]) -> tuple[list[dict], list[dict]]:
 
 def shift_share(sectors: list[dict], start: int, end: int, benchmark: str = "England",
                 grouping: str = "sections") -> tuple[list[dict], list[dict]]:
-    if start >= end or benchmark not in {"England", "Rest of England"} or grouping not in {"sections", "broad"}:
+    if start >= end or benchmark not in {"England", "Rest of England"} or grouping not in {"sections", "broad", "divisions"}:
         raise ValueError("Invalid shift-share specification")
     values = defaultdict(float)
+    labels = {}
     for row in sectors:
-        group = row["sector"] if grouping == "sections" else COARSE[row["sector"]]
+        group = COARSE[row["sector"]] if grouping == "broad" else row["sector"]
         values[(row["year"], row["region"], group)] += row["employees"]
-    industries = sorted(SECTORS) if grouping == "sections" else sorted(set(COARSE.values()))
+        labels[group] = group if grouping == "broad" else row.get("sector_label", group)
+    industries = (sorted({r["sector"] for r in sectors}) if grouping == "divisions" else
+                  sorted(SECTORS) if grouping == "sections" else sorted(set(COARSE.values())))
     names = {r["region"] for r in sectors}
     if not set(FOCUS).issubset(names):
         raise ValueError("Missing focal region")
@@ -180,6 +183,11 @@ def shift_share(sectors: list[dict], start: int, end: int, benchmark: str = "Eng
             for industry in industries:
                 if (year, name, industry) not in values:
                     raise ValueError("Missing region, year or industry")
+    # An all-zero division contributes no jobs or growth. Never drop an industry
+    # with a zero benchmark baseline if any region has jobs at either endpoint.
+    inactive = [i for i in industries if grouping == "divisions" and
+                all(values[(y, n, i)] == 0 for y in [start, end] for n in names)]
+    industries = [i for i in industries if i not in inactive]
     ref0 = {i: math.fsum(values[(start, n, i)] for n in reference) for i in industries}
     ref1 = {i: math.fsum(values[(end, n, i)] for n in reference) for i in industries}
     if any(v <= 0 for v in ref0.values()):
@@ -201,6 +209,7 @@ def shift_share(sectors: list[dict], start: int, end: int, benchmark: str = "Eng
             within = e1 - e0 * (1 + ref_growth)
             region_details.append({"case": case, "region": name, "start_year": start, "end_year": end,
                                    "benchmark": benchmark, "grouping": grouping, "industry": industry,
+                                   "industry_label": labels[industry],
                                    "baseline_employees": e0, "end_employees": e1, "baseline_share_pct": 100 * e0 / base,
                                    "benchmark_industry_growth_pct": 100 * ref_growth,
                                    "national_growth_jobs": national, "industry_mix_jobs": mix, "within_industry_jobs": within,
@@ -215,6 +224,7 @@ def shift_share(sectors: list[dict], start: int, end: int, benchmark: str = "Eng
             raise ValueError("Shift-share decomposition does not reconcile")
         summaries.append({"case": case, "region": name, "start_year": start, "end_year": end,
                           "benchmark": benchmark, "grouping": grouping,
+                          "industry_count": len(industries), "inactive_industries": ";".join(inactive),
                           "baseline_employees": base, "end_employees": current,
                           "actual_growth_pct": 100 * (current / base - 1),
                           "national_growth_pp": 100 * national / base, "industry_mix_pp": 100 * mix / base,
@@ -306,17 +316,22 @@ def run(output_dir: Path | None = None) -> dict:
     tables, manifest = load_inputs(ROOT / "data/extended")
     paye_series, paye_summary = paye_analysis(tables["paye"])
     sectors, reconciliation = aggregate_bres(tables["bres"])
+    divisions = [{**r, "sector": r["division"], "sector_label": r["division_label"]}
+                 for r in tables["bres"] if sector_for(r["division"])]
     details, decompositions = [], []
     for specification in [(2019, 2024, "England", "sections"), (2018, 2024, "England", "sections"),
                           (2019, 2023, "England", "sections"), (2019, 2024, "Rest of England", "sections"),
-                          (2019, 2024, "England", "broad")]:
-        detail, summary = shift_share(sectors, *specification)
+                          (2019, 2024, "England", "broad"), (2019, 2024, "England", "divisions")]:
+        detail, summary = shift_share(divisions if specification[3] == "divisions" else sectors, *specification)
         details += detail
         decompositions += summary
     gaps = []
-    for case in sorted({r["case"] for r in decompositions}):
+    for case in dict.fromkeys(r["case"] for r in decompositions):
         a, b = [next(r for r in decompositions if r["case"] == case and r["region"] == name) for name in FOCUS]
-        gaps.append({"case": case, "growth_gap_pp": a["actual_growth_pct"] - b["actual_growth_pct"],
+        gaps.append({"case": case, "start_year": a["start_year"], "end_year": a["end_year"],
+                     "benchmark": a["benchmark"], "grouping": a["grouping"], "industry_count": a["industry_count"],
+                     "inactive_industries": a["inactive_industries"],
+                     "growth_gap_pp": a["actual_growth_pct"] - b["actual_growth_pct"],
                      "industry_mix_gap_pp": a["industry_mix_pp"] - b["industry_mix_pp"],
                      "within_industry_gap_pp": a["within_industry_pp"] - b["within_industry_pp"]})
     sector_gaps = []
@@ -327,11 +342,25 @@ def run(output_dir: Path | None = None) -> dict:
                             "growth_gap_contribution_pp": a["actual_growth_contribution_pp"] - b["actual_growth_contribution_pp"],
                             "industry_mix_gap_pp": a["industry_mix_pp"] - b["industry_mix_pp"],
                             "within_industry_gap_pp": a["within_industry_pp"] - b["within_industry_pp"]})
+    nested = []
+    for row in sector_gaps:
+        finer = [r for r in details if r["case"] == "2019-2024_england_divisions" and
+                 sector_for(r["industry"]) == row["sector"]]
+        mix, remainder = [math.fsum(r[field] * (1 if r["region"] == FOCUS[0] else -1) for r in finer)
+                          for field in ["industry_mix_pp", "within_industry_pp"]]
+        reassigned = mix - row["industry_mix_gap_pp"]
+        if not math.isclose(row["within_industry_gap_pp"], reassigned + remainder, abs_tol=1e-9):
+            raise ValueError("Nested industry decomposition does not reconcile")
+        nested.append({"sector": row["sector"], "sector_label": row["sector_label"],
+                       "section_mix_gap_pp": row["industry_mix_gap_pp"], "division_mix_gap_pp": mix,
+                       "section_within_gap_pp": row["within_industry_gap_pp"],
+                       "finer_composition_gap_pp": reassigned, "division_within_gap_pp": remainder})
     earnings, earnings_comparison, industry_pay = earnings_analysis(tables["ashe"], tables["cpih"])
     tests = aps_tests(observations, aps["latest_comparison"])
     outputs = {"paye_index": paye_series, "paye_summary": paye_summary, "bres_sectors": sectors,
                "bres_reconciliation": reconciliation, "shift_share_industries": details,
                "shift_share_gap": gaps, "sector_gap_contributions": sector_gaps,
+               "within_section_composition": nested,
                "shift_share_summary": decompositions, "hourly_pay": earnings, "hourly_pay_comparison": earnings_comparison,
                "industry_pay_comparison": industry_pay, "aps_gap_tests": tests}
     for name, rows in outputs.items():

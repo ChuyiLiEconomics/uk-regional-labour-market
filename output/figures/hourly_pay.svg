@@ -2003,7 +2003,7 @@ z
    </g>
   </g>
   <g id="text_22">
-   <!-- Source: ONS ASHE Table 5.6a, 2019 revised and 2026 provisional. Workplace-based employee jobs. -->
+   <!-- Source: ONS ASHE Table 5.6a, 2019 revised and 2026 provisional. Workplace-based jobs. -->
    <g transform="translate(87.12 391.698125) scale(0.085 -0.085)">
     <defs>
      <path id="DejaVuSans-53" d="M 3425 4513 
@@ -2219,23 +2219,6 @@ L 581 0
 L 581 4863 
 z
 " transform="scale(0.015625)"/>
-     <path id="DejaVuSans-79" d="M 2059 -325 
-Q 1816 -950 1584 -1140 
-Q 1353 -1331 966 -1331 
-L 506 -1331 
-L 506 -850 
-L 844 -850 
-Q 1081 -850 1212 -737 
-Q 1344 -625 1503 -206 
-L 1606 56 
-L 191 3500 
-L 800 3500 
-L 1894 763 
-L 2988 3500 
-L 3597 3500 
-L 2059 -325 
-z
-" transform="scale(0.015625)"/>
      <path id="DejaVuSans-6a" d="M 603 3500 
 L 1178 3500 
 L 1178 -63 
@@ -2336,20 +2319,11 @@ z
     <use xlink:href="#DejaVuSans-65" transform="translate(4065.503906 0)"/>
     <use xlink:href="#DejaVuSans-64" transform="translate(4127.027344 0)"/>
     <use xlink:href="#DejaVuSans-20" transform="translate(4190.503906 0)"/>
-    <use xlink:href="#DejaVuSans-65" transform="translate(4222.291016 0)"/>
-    <use xlink:href="#DejaVuSans-6d" transform="translate(4283.814453 0)"/>
-    <use xlink:href="#DejaVuSans-70" transform="translate(4381.226562 0)"/>
-    <use xlink:href="#DejaVuSans-6c" transform="translate(4444.703125 0)"/>
-    <use xlink:href="#DejaVuSans-6f" transform="translate(4472.486328 0)"/>
-    <use xlink:href="#DejaVuSans-79" transform="translate(4533.667969 0)"/>
-    <use xlink:href="#DejaVuSans-65" transform="translate(4592.847656 0)"/>
-    <use xlink:href="#DejaVuSans-65" transform="translate(4654.371094 0)"/>
-    <use xlink:href="#DejaVuSans-20" transform="translate(4715.894531 0)"/>
-    <use xlink:href="#DejaVuSans-6a" transform="translate(4747.681641 0)"/>
-    <use xlink:href="#DejaVuSans-6f" transform="translate(4775.464844 0)"/>
-    <use xlink:href="#DejaVuSans-62" transform="translate(4836.646484 0)"/>
-    <use xlink:href="#DejaVuSans-73" transform="translate(4900.123047 0)"/>
-    <use xlink:href="#DejaVuSans-2e" transform="translate(4952.222656 0)"/>
+    <use xlink:href="#DejaVuSans-6a" transform="translate(4222.291016 0)"/>
+    <use xlink:href="#DejaVuSans-6f" transform="translate(4250.074219 0)"/>
+    <use xlink:href="#DejaVuSans-62" transform="translate(4311.255859 0)"/>
+    <use xlink:href="#DejaVuSans-73" transform="translate(4374.732422 0)"/>
+    <use xlink:href="#DejaVuSans-2e" transform="translate(4426.832031 0)"/>
    </g>
    <!-- Real change uses the UK CPIH index for the matching April. It does not adjust for regional price levels. -->
    <g transform="translate(87.12 401.216266) scale(0.085 -0.085)">

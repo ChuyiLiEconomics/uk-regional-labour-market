@@ -2,6 +2,8 @@
 
 Employment, pay and industrial change in the North West and West Midlands. How have the two regions changed since 2019, and how much of their employee job growth gap is associated with their initial industry mix?
 
+Manufacturing accounted for 9.2% of covered employee jobs in the North West and 11.6% in the West Midlands in 2019. The comparison examines whether this difference in industry structure helps account for their subsequent employment growth. It is a two-region case study, without a treatment or control group.
+
 ## Findings
 
 | Measure | North West | West Midlands |
@@ -19,6 +21,8 @@ The BRES employee job growth gap was **2.20 percentage points**. A shift-share d
 ![Decomposition of employee job growth](output/figures/shift_share.png)
 
 Manufacturing contributed +1.55 percentage points to the North West minus West Midlands growth gap. Transport and storage contributed −1.33 points, and wholesale and retail −1.12 points. The [industry contribution chart](output/figures/sector_contributions.png) shows all 19 sections.
+
+Using **84 active two-digit industries** instead of 19 sections reduces the industry-mix contribution from **0.60 to 0.35 points** and increases the remainder from **1.59 to 1.85 points**. Finer industry composition therefore does not account for most of the gap in this decomposition. The [nested comparison](output/tables/within_section_composition.csv) shows where the allocation changes, including offsetting contributions within manufacturing and transport.
 
 The North West growth advantage remains positive when changing the baseline year, end year, benchmark and industry grouping. Its size and the allocation between components change. These are descriptive accounting results; the remainder does not identify the effect of regional policy or competitiveness.
 
@@ -78,6 +82,7 @@ The APS-only script remains available as `python code/python/analyse.py`. Its `-
 - [PAYE growth comparisons](output/tables/paye_summary.csv)
 - [Shift-share results and sensitivity cases](output/tables/shift_share_summary.csv)
 - [Contributions to the regional growth gap](output/tables/sector_gap_contributions.csv)
+- [Finer industry composition within sections](output/tables/within_section_composition.csv)
 - [Hourly pay comparisons](output/tables/hourly_pay_comparison.csv)
 - [Pay within industries](output/tables/industry_pay_comparison.csv)
 - [Approximate APS tests](output/tables/aps_gap_tests.csv)

@@ -13,6 +13,7 @@ sys.path.insert(0, str(PROJECT / "code/python"))
 import analyse
 import research
 import prepare_sources
+import reporting
 
 
 def sector_fixture():
@@ -92,6 +93,51 @@ class ResearchTests(unittest.TestCase):
         self.assertEqual(reconciliation[0]["sum_sections_a_s"], 190)
         self.assertEqual(reconciliation[0]["division_sum_minus_published"], -10)
 
+    def test_finer_composition_can_account_for_a_section_remainder(self):
+        divisions = []
+        for row in sector_fixture():
+            division = f"{research.SECTORS[row['sector']][0]:02d}"
+            if row["sector"] != "C":
+                divisions.append({**row, "sector": division, "employees": 100})
+                continue
+            for code in ["10", "11"]:
+                baseline = (200 if code == "10" else 0) if row["region"] == "North West" else (
+                    (0 if code == "10" else 200) if row["region"] == "West Midlands" else 100)
+                divisions.append({**row, "sector": code, "employees": baseline * (2 if row["year"] == 2024 and code == "10" else 1)})
+        sections = [{**r, "sector": research.sector_for(r["sector"])} for r in divisions]
+        _, coarse = research.shift_share(sections, 2019, 2024, "Rest of England")
+        _, fine = research.shift_share(divisions, 2019, 2024, "Rest of England", "divisions")
+        for a, b in zip(coarse, fine):
+            self.assertAlmostEqual(a["actual_growth_pct"], b["actual_growth_pct"])
+            self.assertAlmostEqual(a["industry_mix_pp"] + a["within_industry_pp"], b["industry_mix_pp"] + b["within_industry_pp"])
+        self.assertAlmostEqual(coarse[0]["within_industry_pp"] - coarse[1]["within_industry_pp"], 10)
+        self.assertAlmostEqual(fine[0]["within_industry_pp"] - fine[1]["within_industry_pp"], 0)
+
+    def test_zero_divisions_are_omitted_only_if_all_endpoint_counts_are_zero(self):
+        fixture = [{**r, "sector": f"{research.SECTORS[r['sector']][0]:02d}"} for r in sector_fixture()]
+        for row in fixture:
+            if row["sector"] == "05":
+                row["employees"] = 0
+        _, summaries = research.shift_share(fixture, 2019, 2024, grouping="divisions")
+        self.assertEqual(summaries[0]["inactive_industries"], "05")
+        self.assertEqual(summaries[0]["industry_count"], 18)
+        next(r for r in fixture if r["sector"] == "05" and r["year"] == 2024)["employees"] = 1
+        with self.assertRaisesRegex(ValueError, "no positive baseline"):
+            research.shift_share(fixture, 2019, 2024, grouping="divisions")
+
+    def test_report_conclusions_follow_reversals_and_missing_tests(self):
+        self.assertIn("not of the same strict sign", reporting.sensitivity_conclusion([
+            {"growth_gap_pp": 2}, {"growth_gap_pp": -1}]))
+        self.assertIn("negative in every case", reporting.sensitivity_conclusion([{"growth_gap_pp": -1}]))
+        self.assertIn("for: employment", reporting.aps_conclusion([
+            {"indicator": "employment", "reject_5pct_after_holm": 1},
+            {"indicator": "inactivity", "reject_5pct_after_holm": None}]))
+        self.assertIn("unavailable", reporting.aps_conclusion([
+            {"indicator": "employment", "reject_5pct_after_holm": 0},
+            {"indicator": "inactivity", "reject_5pct_after_holm": None}]))
+        self.assertIn("do not support", reporting.aps_conclusion([
+            {"indicator": "employment", "reject_5pct_after_holm": None}]))
+
     def test_calendar_baseline_needs_twelve_unique_months(self):
         rows = [{"region": "North West", "period": f"2019-{m:02d}", "payrolled_employees": 100} for m in range(1, 13)]
         self.assertEqual(research.annual_average(rows, 2019, "North West"), 100)
@@ -138,16 +184,36 @@ class ResearchTests(unittest.TestCase):
         self.assertAlmostEqual(current["median_in_april_2019_gbp"], 17.79 * baseline / april)
 
     def test_full_research_runs_offline_from_release_inputs(self):
-        with tempfile.TemporaryDirectory() as directory, patch.object(analyse, "download", side_effect=AssertionError("Network used")):
+        reports = []
+        original = reporting.findings
+        def capture_report(tables, aps, manifest, local):
+            reports.append((tables, aps, manifest, local))
+            return original(tables, aps, manifest, local)
+        with tempfile.TemporaryDirectory() as directory, patch.object(analyse, "download", side_effect=AssertionError("Network used")), patch.object(reporting, "findings", side_effect=capture_report):
             result = research.run(Path(directory))
             self.assertEqual(result["source_rows"], {"bres": 5607, "paye": 1332, "ashe": 480, "cpih": 106})
             for name in ["paye_recovery", "hourly_pay", "shift_share", "sector_contributions"]:
                 for extension in ["png", "svg"]:
                     self.assertTrue((Path(directory) / "figures" / f"{name}.{extension}").is_file())
             text = (Path(directory) / "findings.md").read_text(encoding="utf-8")
-            self.assertIn("2019-2024", text)
-            self.assertIn("5.65%", text)
+            self.assertIn("2019–2024", text)
+            self.assertIn("+5.65", text)
+            self.assertIn("84 active", text)
             self.assertNotIn(str(PROJECT), text)
+        tables, aps, manifest, local = reports[0]
+        coarse, fine = [next(r for r in tables["shift_share_gap"] if r["case"] == c)
+                        for c in ["2019-2024_england_sections", "2019-2024_england_divisions"]]
+        self.assertAlmostEqual(coarse["growth_gap_pp"], fine["growth_gap_pp"])
+        self.assertAlmostEqual(sum(r["finer_composition_gap_pp"] for r in tables["within_section_composition"]),
+                               fine["industry_mix_gap_pp"] - coarse["industry_mix_gap_pp"])
+        tables["aps_gap_tests"][0]["reject_5pct_after_holm"] = 1
+        aps["baseline_changes"][0]["change_region_a_pp"] = 3.7
+        tables["sector_gap_contributions"][0]["growth_gap_contribution_pp"] = 8.76
+        revised_text = original(tables, aps, manifest, local)
+        self.assertIn("for: employment", revised_text)
+        self.assertIn("+3.7 percentage points", revised_text)
+        self.assertIn("Agriculture: +8.76", revised_text)
+        self.assertNotIn("None of the available comparisons", revised_text)
 
 
 if __name__ == "__main__":
