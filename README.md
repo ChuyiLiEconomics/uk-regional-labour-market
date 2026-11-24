@@ -1,88 +1,76 @@
 # UK Regional Labour Market Analysis
 
-A reproducible Python and SQL comparison of employment and economic inactivity in North West and West Midlands, England, using the ONS Annual Population Survey through Nomis.
+Employment and economic inactivity in England's North West and West Midlands, based on the ONS Annual Population Survey. The comparison covers people aged 16–64, using annual survey periods ending between March 2015 and June 2026.
 
-**Author:** Chuyi Li, Economics PhD candidate. [GitHub profile](https://github.com/ChuyiLiEconomics).
+## Results
 
-The initial pipeline and eight data-integrity tests have run successfully. The author reproduced the cached-data analysis on 24 November 2026 and obtained the same observation counts and comparison values.
+For July 2025–June 2026, the latest period in this download:
 
-The project asks how two regional labour markets differ over time. It demonstrates official API data retrieval, validation, missing-data handling, SQLite joins and aggregation, time-series charts, and clear reporting of limitations. It does not measure vacancies or estimate causal policy effects.
+| Indicator | North West | West Midlands | Difference |
+|---|---:|---:|---:|
+| Employment rate | 74.3% | 73.5% | +0.8 pp |
+| Economic inactivity rate | 22.4% | 22.0% | +0.4 pp |
 
-## Outputs
+Differences are North West minus West Midlands, in percentage points. The charts show the full series, with the published approximate 95% confidence intervals shaded.
 
-![Regional employment rates](output/figures/employment.png)
+![Employment rates in the North West and West Midlands](output/figures/employment.png)
 
-![Regional inactivity rates](output/figures/inactivity.png)
+![Economic inactivity rates in the North West and West Midlands](output/figures/inactivity.png)
 
-See [generated findings and limitations](documents/findings.md), [latest comparison](output/tables/latest_comparison.csv) and [SQL query](code/sql/latest_comparison.sql).
+The estimates have sampling uncertainty. The regional differences have not been tested for statistical significance.
 
-## Run the analysis
+## Data and methods
 
-Requires Python 3.12 or newer. The initial run was verified with Python 3.14 and Matplotlib 3.10.9. SQLite, CSV parsing, HTTP requests and tests use the Python standard library.
+Data come from the [ONS Annual Population Survey on Nomis](https://www.nomisweb.co.uk/datasets/apsnew), dataset `NM_17_5`. The download from 24 November 2026 contains 184 observations across 46 survey periods: two regions and two indicators for each period.
+
+The Python script downloads the data, checks the region and indicator definitions, and saves a cleaned CSV and SQLite database. Missing or flagged values remain `NULL`. The SQL query compares the latest period with valid observations in both regions.
+
+Each observation covers 12 months. Neighbouring periods overlap, so the lines should not be read as independent quarterly estimates. Employment and inactivity both refer to the population aged 16–64; inactivity is distinct from unemployment.
+
+This is a descriptive comparison. It does not identify the causes of regional differences. ONS also advises caution when interpreting changes in APS estimates because of smaller sample sizes and increased volatility; see the [survey methodology](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/annualpopulationsurveyapsqmi).
+
+## Run
+
+Requires Python 3.12 or newer. Tested with Python 3.14.4 and Matplotlib 3.10.9.
 
 ```sh
 python -m venv .venv
-# Activate .venv using the command appropriate for your operating system.
+# Windows: .venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements.txt
 python code/python/analyse.py --fetch
-python -m unittest discover -s tests -v
 ```
 
-On Windows, `py -3.14` can replace `python` if that is how Python is installed. Activate a PowerShell virtual environment with `.\.venv\Scripts\Activate.ps1`.
-
-After downloading data, rerun offline with:
+After the first download, the saved data can be used offline:
 
 ```sh
 python code/python/analyse.py
 ```
 
-To reproduce a named local snapshot:
+Run the tests with:
 
 ```sh
-python code/python/analyse.py --snapshot source_TIMESTAMP_HASH.json
+python -m unittest discover -s tests -v
 ```
 
-Use an actual manifest filename from `data/raw`. Raw downloads are excluded from Git by default; a fresh clone downloads its own official snapshot, which may include later revisions. Exact historical reproduction requires retaining the named local raw snapshot and matching SHA-256 hash.
+On Windows, `py -3.14` can replace `python` when creating the environment.
 
-## Data and interpretation
+Each download is saved in `data/raw/` with its query, retrieval time and SHA-256 hash. These local files are excluded from Git. A fresh download may contain revised estimates; reproducing an earlier run requires its saved snapshot. Use `--snapshot` followed by the filename of an existing `source_*.json` manifest to select one.
 
-- Source: [ONS Annual Population Survey on Nomis](https://www.nomisweb.co.uk/datasets/apsnew), API dataset `NM_17_5`.
-- Regions: North West (`E12000002`), West Midlands (`E12000005`), checked against official metadata and every returned row.
-- Indicators: employment rate and economic inactivity rate, both aged 16-64.
-- Query: survey-period ends from January 2015 to the latest available period. The first returned annual window may begin in 2014; see the generated report for exact coverage.
-- Adjacent observations are overlapping 12-month windows. They are not independent quarterly measurements.
-- Shading shows the published approximate 95% confidence intervals. Regional point-estimate differences are not tested for significance.
-- ONS warns about increased APS volatility and sampling limitations. Read the [ONS methodology](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/annualpopulationsurveyapsqmi).
+## Files
 
-Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Source: Office for National Statistics via Nomis. See [Nomis copyright](https://www.nomisweb.co.uk/home/copyright.asp). The data licence does not imply ONS endorsement. A software licence has not yet been selected.
+| File or folder | Contents |
+|---|---|
+| [code/python/analyse.py](code/python/analyse.py) | Download, cleaning, database loading and charts |
+| [code/sql/latest_comparison.sql](code/sql/latest_comparison.sql) | Comparison of the latest common survey period |
+| [output/figures/](output/figures/) | Employment and inactivity charts |
+| [output/tables/latest_comparison.csv](output/tables/latest_comparison.csv) | Values used in the results table |
+| [documents/findings.md](documents/findings.md) | Results, data checks and source details |
+| [documents/verification.md](documents/verification.md) | Run and test records |
+| [tests/test_integrity.py](tests/test_integrity.py) | Tests for missing data, source definitions and SQL comparisons |
 
-## Project structure
+## Credits
 
-```text
-uk-regional-labour-market/
-├── CLAUDE.md              # Project research and reproducibility rules
-├── README.md              # Project overview and run instructions
-├── requirements.txt
-├── code/
-│   ├── R/                 # Reserved
-│   ├── python/            # Official-data analysis pipeline
-│   ├── sql/               # Latest common-period comparison
-│   └── stata/             # Reserved
-├── data/
-│   ├── raw/               # Immutable official snapshots; ignored by Git
-│   └── clean/             # Derived CSV and SQLite database; ignored by Git
-├── output/
-│   ├── tables/            # Generated comparisons and quality checks
-│   └── figures/           # Generated PNG charts
-├── documents/             # Generated findings and methodology notes
-├── decks/                 # Reserved; no presentation yet
-├── notes/                 # Learning guide and analytical questions
-├── progress_logs/         # Project progress and actual verification
-└── tests/                 # Data integrity and SQL behaviour tests
-```
+Source: Office for National Statistics via Nomis. Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). See [Nomis copyright](https://www.nomisweb.co.uk/home/copyright.asp).
 
-## Authorship and development
-
-Developed with AI coding assistance. Data sources, processing decisions and executed checks are documented in this repository. This is a portfolio study rather than commissioned professional work.
-
-The next extension will be selected around a specific analytical question, with its data definitions and verification recorded alongside the results.
+Code developed with AI assistance.
