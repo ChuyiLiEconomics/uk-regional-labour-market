@@ -1,35 +1,49 @@
-# Regional labour market findings
+# Regional labour market comparisons
 
-This descriptive comparison covers North West and West Midlands, England, for people aged 16-64. It does not estimate policy effects or hiring demand.
+Employment and economic inactivity in North West and West Midlands, for people aged 16–64. The analysis compares the latest annual estimates with a fixed baseline and follows the regional gap through the full series.
 
-## Latest comparable observations
+## Latest estimates
 
-| Indicator | Survey period | North West (%) | West Midlands (%) | NW minus WM (pp) |
+| Indicator | Survey period | North West (%) | West Midlands (%) | Difference (pp) |
 |---|---|---:|---:|---:|
-| Employment | Jul 2025-Jun 2026 | 74.3 | 73.5 | +0.8 |
-| Inactivity | Jul 2025-Jun 2026 | 22.4 | 22.0 | +0.4 |
+| Employment rate | Jul 2025-Jun 2026 | 74.3 | 73.5 | +0.8 |
+| Economic inactivity rate | Jul 2025-Jun 2026 | 22.4 | 22.0 | +0.4 |
 
-The gap is a percentage-point difference between point estimates, not a causal effect or a claim of statistical significance. SQL selects the latest period with a non-missing rate in both regions for each indicator.
+Differences throughout this report are North West minus West Midlands.
 
-## Interpretation and limitations
+## Comparison with the baseline
 
-- Employment and inactivity are distinct measures. Inactivity is not unemployment; unemployment rates use a different denominator.
-- Adjacent observations are overlapping 12-month survey periods, not independent quarterly observations. The x-axis records the end of each period.
-- Published approximate confidence intervals describe sampling uncertainty. No independence assumption is used to calculate a confidence interval for the regional gap.
-- ONS warns that smaller achieved APS samples can increase volatility and non-response concerns. Regional rates should be considered alongside other labour market indicators.
-- These are regional population estimates, not city estimates, counts of vacancies, employer demand or sponsorship availability.
-- Historical estimates may be revised. The local snapshot and its hash identify the bytes used for this run.
+Between Jan 2019-Dec 2019 and Jul 2025-Jun 2026, the employment rate in North West fell by 0.2 percentage points; in West Midlands it fell by 0.4 percentage points. The regional gap changed from +0.6 to +0.8 percentage points.
 
-## Provenance and quality checks
+Between Jan 2019-Dec 2019 and Jul 2025-Jun 2026, the economic inactivity rate in North West rose by 0.1 percentage points; in West Midlands it fell by 0.3 percentage points. The regional gap changed from +0.0 to +0.4 percentage points.
 
-- Source: ONS Annual Population Survey via Nomis, `NM_17_5`.
-- Retrieved at UTC: `2026-11-24T16:09:41.732023+00:00`.
-- Survey period ends: `2015-03` to `2026-06`.
-- Source rows: 368; cleaned observations: 184; periods: 46.
+## How the gap changed
+
+The employment rate gap ranged from -1.8 percentage points (first reached in Apr 2023-Mar 2024) to +1.0 (first reached in Apr 2015-Mar 2016).
+
+The economic inactivity rate gap ranged from -0.7 percentage points (first reached in Apr 2015-Mar 2016) to +2.1 (first reached in Jan 2023-Dec 2023).
+
+![Regional differences](../output/figures/regional_gaps.png)
+
+A latest-period ranking can therefore hide earlier reversals. The gap chart records the direction and scale of those differences; it does not establish that any reversal is statistically significant.
+
+## Scope and interpretation
+
+The two regions form a descriptive case study, not a matched treatment and control group. Calendar 2019 is the default pre-pandemic reference period; a different baseline can be selected explicitly. A baseline is a comparison point, not an estimated counterfactual.
+
+Each estimate covers 12 months and neighbouring windows overlap. The published approximate confidence intervals describe uncertainty around each regional rate. No independence assumption is used to construct an interval for the difference or its change over time.
+
+ONS advises additional caution with APS changes because of response rates, weighting and increased volatility. These series alone cannot distinguish changes within population groups from changes in age or other population composition. Age-specific estimates, reasons for inactivity and administrative employment data would be needed to examine those explanations.
+
+## Data
+
+- ONS Annual Population Survey via Nomis, dataset NM_17_5.
+- Downloaded: 2026-11-24T16:09:41.732023+00:00.
+- Source dataset update recorded by Nomis: 2026-10-20 07:00:00.
+- Period ends: 2015-03 to 2026-06.
+- 368 source measure rows; 184 observations; 46 survey periods.
 - Missing or non-normal measure cells retained as NULL: 0.
-- Snapshot SHA-256: `910ccddb33990b3e3b212a05b3ec5f9700086babd51592a7af195ce315ec1b03`.
-- Validated geography names, ONS codes and region types; indicator definitions; duplicate keys; record count; free-for-publication flags; numeric bounds; and rate/confidence cube completeness.
 
-[Exact source query](https://www.nomisweb.co.uk/api/v01/dataset/NM_17_5.data.csv?geography=2013265922%2C2013265925&time=2015-01%2Clatest&variable=45%2C111&measures=20599%2C21003) · [ONS methodology](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/annualpopulationsurveyapsqmi) · [Nomis copyright](https://www.nomisweb.co.uk/home/copyright.asp)
+[Source query](https://www.nomisweb.co.uk/api/v01/dataset/NM_17_5.data.csv?geography=2013265922%2C2013265925&time=2015-01%2Clatest&variable=45%2C111&measures=20599%2C21003) · [ONS methodology](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/annualpopulationsurveyapsqmi)
 
-Contains public sector information licensed under the Open Government Licence v3.0.
+The original public aggregate download and metadata are included in data/snapshot. The cleaned full series, all common-period comparisons and baseline changes are available under output/tables.

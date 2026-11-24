@@ -1,0 +1,31 @@
+{
+  "format": "uk-regional-labour-market-snapshot-v1",
+  "dataset": "NM_17_5",
+  "raw_file": "nomis.csv",
+  "sha256": "910ccddb33990b3e3b212a05b3ec5f9700086babd51592a7af195ce315ec1b03",
+  "retrieved_at_utc": "2026-11-24T16:09:41.732023+00:00",
+  "source_last_updated": "2026-10-20 07:00:00",
+  "source_url": "https://www.nomisweb.co.uk/api/v01/dataset/NM_17_5.data.csv?geography=2013265922%2C2013265925&time=2015-01%2Clatest&variable=45%2C111&measures=20599%2C21003",
+  "query": {
+    "geography": "2013265922,2013265925",
+    "time": "2015-01,latest",
+    "variable": "45,111",
+    "measures": "20599,21003"
+  },
+  "regions": {
+    "2013265922": [
+      "North West",
+      "E12000002"
+    ],
+    "2013265925": [
+      "West Midlands",
+      "E12000005"
+    ]
+  },
+  "source_rows": 368,
+  "clean_rows": 184,
+  "period_end_min": "2015-03",
+  "period_end_max": "2026-06",
+  "attribution": "Source: Office for National Statistics via Nomis. Contains public sector information licensed under the Open Government Licence v3.0.",
+  "copyright_url": "https://www.nomisweb.co.uk/home/copyright.asp"
+}

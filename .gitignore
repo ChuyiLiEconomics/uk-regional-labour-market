@@ -4,10 +4,11 @@ __pycache__/
 .pytest_cache/
 .env
 .env.*
-data/raw/*
-!data/raw/.gitkeep
-data/clean/*
-!data/clean/.gitkeep
+data/raw/
+data/clean/
+data/local/
+output/local/
+progress_logs/
 data/latest_snapshot.json
 *.sqlite
 *.sqlite-*
